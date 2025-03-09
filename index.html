@@ -3,55 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sachintha Madushika - Personal Website</title>
+    <title>Sachintha Madushika</title>
     <style>
-    body {
-            animation: fadeIn 1s ease-in;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Add continuous background animation */
-        .animated-bg {
-            animation: gradientShift 10s ease infinite;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            min-height: 100vh;
-        }
-
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        .header {
+        body {
+            font-family: Arial, sans-serif;
+            animation: bodyFade 5s ease infinite alternate;
+            min-height: 100vh;
+        }
+
+        @keyframes bodyFade {
+            0% { background-color: yellow; }
+            100% { background-color: black; }
+        }
+
+        /* Cover Section */
+        .cover {
             position: relative;
             height: 400px;
-            background: url('https://i.ibb.co/CpWjyXhJ/4698.jpg') center/cover;
+        }
+
+        .cover-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .profile-img {
@@ -69,9 +49,10 @@
             text-align: center;
             margin-top: 120px;
             font-size: 2.5em;
-            color: #333;
+            style="color: red;"
         }
 
+        /* Image Grid */
         .image-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -88,6 +69,7 @@
             border-radius: 10px;
         }
 
+        /* Buttons Section */
         .buttons {
             display: flex;
             justify-content: center;
@@ -96,74 +78,132 @@
             margin: 40px 0;
         }
 
-        .buttons a {
+        .btn {
             background: blue;
             color: red;
-            padding: 15px 30px;
-            text-decoration: none;
+            padding: 12px 24px;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
             font-weight: bold;
-            text-align: center;
         }
 
+        /* Social Media */
         .social-media {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin: 50px 0;
-        }
-
-        .social-media a {
-            width: 60px;
-            height: 60px;
+            text-align: center;
+            margin: 40px 0;
         }
 
         .social-media img {
-            width: 100%;
+            width: 50px;
+            margin: 0 20px;
+            cursor: pointer;
+        }
+
+        /* Side Menu */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
             height: 100%;
-            object-fit: contain;
+            background: #000000;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            z-index: 99;
+            padding: 20px;
+        }
+
+        .side-menu.active {
+            right: 0;
+        }
+
+        .menu-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: yellow;
+            color: red;
+            border: none;
+            border-top: 2px solid blue;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .menu-btn:first-child {
+            border-top: none;
         }
     </style>
 </head>
 <body>
-<body
-class="animated-bg">
-    <header class="header">
-        <img src="https://i.ibb.co/S4NBw2Jy/8263.jpg" alt="Profile" class="profile-img">
-    </header>
+    <!-- Cover Section -->
+    <div class="cover">
+        <img src="https://i.ibb.co/CpWjyXhJ/4698.jpg" class="cover-photo" alt="Cover">
+        <img src="https://i.ibb.co/S4NBw2Jy/8263.jpg" class="profile-img" alt="Profile">
+    </div>
+    <h1 
+    <h1 style="color: red;"class="name">MR SACHINTHA MADUSHIKA</h1>
 
-    <h1 class="name" style="color: blue;">MR SACHINTHA MADUSHIKA</h1>
-    
+    <!-- Image Grid -->
     <div class="image-grid">
-        <img src="https://i.ibb.co/nNNVzqxj/1437.jpg" alt="1">
-        <img src="https://i.ibb.co/xqzJhM7f/7524.jpg" alt="2">
-        <img src="https://i.ibb.co/s0SCPrG/71.jpg" alt="3">
-        <img src="https://i.ibb.co/YFwgd3gq/7089.jpg" alt="4">
-        <img src="https://i.ibb.co/mVvfrB73/9985.jpg" alt="5">
-        <img src="https://i.ibb.co/q3bTMRk2/2457.jpg" alt="6">
+        <img src="https://i.ibb.co/nNNVzqxj/1437.jpg" alt="Image 1">
+        <img src="https://i.ibb.co/xqzJhM7f/7524.jpg" alt="Image 2">
+        <img src="https://i.ibb.co/s0SCPrG/71.jpg" alt="Image 3">
+        <img src="https://i.ibb.co/YFwgd3gq/7089.jpg" alt="Image 4">
+        <img src="https://i.ibb.co/mVvfrB73/9985.jpg" alt="Image 5">
+        <img src="https://i.ibb.co/q3bTMRk2/2457.jpg" alt="Image 6">
     </div>
 
+    <!-- Buttons -->
     <div class="buttons">
-        <a href="https://levanter-pp.vercel.app/">whatsapp fuel dp</a>
-        <a href="https://dexter-song-ptt-site.vercel.app/">Status song</a>
-        <a href="https://bot-hosting.net">Free bot hosting site</a>
-        <a href="https://www.fdown.net/">Fb vdo download</a>
-        <a href="https://en1.savefrom.net/1-youtube-video-downloader-3vV/">Yt vdo downloader</a>
-        <a href="https://snaptik.app/en2>tiktok vdo downloader</a¢
-        <a href="https://vocalremover.org/" >song vocal revove</a>
-        <a href="https://www.remove.bg/">photo BG remove</a>
-        <a href="https://perchance.org/ai-text-to-image-generator>Ai image generator</a>
-        <a href="sinhalasub.lk/>free move downloader</a>
-        
+        <a href="https://levanter-pp.vercel.app/" class="btn">whatsapp fuel dp</a>
+        <a href="https://dexter-song-ptt-site.vercel.app/" class="btn">Status song</a>
+        <a href="https://bot-hosting.net" class="btn">Free bot hosting site</a>
+        <a href="https://www.fdown.net/" class="btn">Fb vdo download</a>
+        <a href="https://en1.savefrom.net/1-youtube-video-downloader-3vV/" class="btn">Yt vdo downloader</a>
     </div>
 
+    <!-- Social Media -->
     <div class="social-media">
-        <a href="https://wa.me/+94775936474?text=HI_MR _Sachintha💥🎧">
+        <a href="https://wa.me/+94775936474?text=HI_MR_ම_chiස_ප_💥🎧" target="_blank">
             <img src="https://i.ibb.co/GvGbXSYd/6186.png" alt="WhatsApp">
         </a>
         <a href="mailto:gsmadushikaz@gmail.com">
             <img src="https://i.ibb.co/pjffsjZ0/5675.png" alt="Email">
         </a>
     </div>
+
+    <!-- Menu System -->
+    <div class="menu-toggle">🔴</div>
+    <div class="side-menu">
+        <a href="https://sinhalasub.lk/" class="menu-btn">free movie download</a>
+        <a href="https://vocalremover.org/" class="menu-btn">song vocal remove</a>
+        <a href="https://levanter-pp.vercel.app/" class="menu-btn">whatsapp fuel dp</a>
+        <a href="https://dexter-song-ptt-site.vercel.app/" class="menu-btn">Status song</a>
+        <a href="https://bot-hosting.net" class="menu-btn">Free bot hosting site</a>
+        <a href="https://www.fdown.net/" class="menu-btn">Fb vdo download</a>
+        <a href="https://en1.savefrom.net/1-youtube-video-downloader-3vV/" class="menu-btn">Yt vdo downloader</a>
+       <a href="https://www.remove.bg/"class="menu-btn">Photo BG remove</a> 
+       <a href="https://perchance.org/ai-text-to-image-generator"class="menu-btn">Ai image generat</a>
+          </div>
+
+    <script>
+        // Menu Toggle
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.side-menu').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
