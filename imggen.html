@@ -13,12 +13,20 @@
         /* Body styles */
         body {
             font-family: Arial, sans-serif;
-            background: url('https://source.unsplash.com/1600x900/?nature,forest') no-repeat center center fixed;
-            background-size: cover;
-            color: #e0e0e0;
+            background-color: #000; /* Black background */
+            color: #fff;
             text-align: center;
-            transition: background 0.5s ease-in-out;
-            animation: fadeIn 2s ease-in-out, natureBackground 20s infinite; /* Added natureBackground animation */
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Header styles */
+        h1 {
+            color: #ff4757; /* Red color for header */
+            font-size: 2.5rem;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
         }
 
         /* Keyframe animation for fading in */
@@ -27,93 +35,86 @@
             100% { opacity: 1; }
         }
 
-        /* Keyframe animation for nature background */
-        @keyframes natureBackground {
-            0% { background-image: url('https://source.unsplash.com/1600x900/?nature,forest'); }
-            25% { background-image: url('https://source.unsplash.com/1600x900/?nature,mountain'); }
-            50% { background-image: url('https://source.unsplash.com/1600x900/?nature,river'); }
-            75% { background-image: url('https://source.unsplash.com/1600x900/?nature,beach'); }
-            100% { background-image: url('https://source.unsplash.com/1600x900/?nature,forest'); }
-        }
-
-        h1 { 
-            color: red; /* Changed to red */
-            animation: fadeIn 3s ease-in-out; /* Fade-in for header */
-        }
-
         /* Chat container styling */
         #chat-container {
             width: 90%;
-            max-width: 400px;
+            max-width: 500px;
             margin: 20px auto;
-            border-radius: 10px;
-            background: #222;
-            padding: 10px;
+            border-radius: 15px;
+            background: #1e1e1e;
+            padding: 20px;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border: 2px solid red; /* Changed to red */
-            animation: slideUp 2s ease-out; /* Slide up animation */
+            flex-direction: column;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3); /* Red shadow */
         }
 
         /* Input field styling */
-        input {
-            flex: 1;
+        input, select {
+            width: 100%;
             padding: 10px;
             border: none;
             outline: none;
-            border-radius: 5px;
+            border-radius: 8px;
             background: #333;
             color: #fff;
-            border: 2px solid red; /* Changed to red */
+            font-size: 16px;
         }
 
         /* Button styling */
         button {
-            margin-left: 10px;
-            padding: 10px 15px;
+            padding: 10px 20px;
             border: none;
             cursor: pointer;
-            background: #9b59b6; /* Purplish color */
+            background: #ff4757; /* Red color */
             color: #fff;
-            border-radius: 5px;
-            border: 2px solid red; /* Changed to red */
-            animation: bounce 1s infinite; /* Animation for button bounce */
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background 0.3s ease;
         }
 
-        /* Hover effect for button */
-        button:hover { background: #8e44ad; }
+        button:hover {
+            background: #ff6b81; /* Lighter red on hover */
+        }
 
         /* Loading text styling */
-        .loading { font-size: 18px; color: #ff9800; margin-top: 15px; }
+        .loading {
+            font-size: 18px;
+            color: #ffa502; /* Orange color */
+            margin-top: 15px;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Keyframe animation for pulse effect */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
 
         /* Image container */
         .image-container img {
-            max-width: 90%;
-            border-radius: 10px;
+            max-width: 100%;
+            border-radius: 15px;
             margin-top: 20px;
-            border: 2px solid red; /* Changed to red */
-            animation: fadeIn 2s ease-in-out; /* Fade-in for images */
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3); /* Red shadow */
         }
 
-        /* Download button styling with purple-blue gradient */
+        /* Download button styling */
         .download-button {
-            margin-top: 30px;
-            padding: 20px 40px;
-            background: linear-gradient(45deg, #9b59b6, #3498db); /* Purple-blue gradient */
-            border-radius: 5px;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: #ff4757; /* Red color */
+            border-radius: 8px;
             color: #fff;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 18px;
             display: inline-block;
             border: none;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.3s ease;
         }
 
-        /* Hover effect for download button */
         .download-button:hover {
-            transform: scale(1.1); /* Enlarges the button slightly on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
         }
 
         /* Social links styles */
@@ -127,125 +128,80 @@
         }
 
         .social-links img {
-            width: 30px;
-            height: 30px;
-            transition: transform 0.3s ease-in-out;
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s ease;
         }
 
         .social-links img:hover {
-            transform: scale(1.2); /* Enlarges social icons on hover */
+            transform: scale(1.2); /* Enlarge icons on hover */
         }
 
         /* Footer styles */
-        .footer { 
-            margin-top: 20px; 
+        .footer {
+            margin-top: 30px;
             font-size: 14px;
-            animation: fadeIn 3s ease-in-out; /* Fade-in for footer */
-        }
-
-        /* Keyframe animation for bounce effect */
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
-        }
-
-        /* Keyframe animation for slide-up effect */
-        @keyframes slideUp {
-            0% {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            color: #888;
         }
     </style>
 </head>
 <body>
-    <h1>MR SACHINTHA IMG GEN</h1>
+    <h1>SACHINTHA IMG GEN</h1>
 
     <div id="chat-container">
         <input type="text" id="promptInput" placeholder="Type your prompt...">
-        <button id="generateBtn">Send</button>
+        <select id="sizeSelect">
+            <option value="512x512">512x512</option>
+            <option value="1024x1024">1024x1024</option>
+            <option value="1920x1080">1920x1080</option>
+        </select>
+        <button id="generateBtn">Generate Image</button>
     </div>
 
-    <div class="loading" id="loadingMessage" style="display: none;"></div>
+    <div class="loading" id="loadingMessage" style="display: none;">Generating...</div>
     <div class="image-container" id="imageContainer"></div>
 
-    <div id="downloadBtn" class="download-button" style="display: none;"></div>
+    <div id="downloadBtn" class="download-button" style="display: none;">Download Image</div>
 
     <script>
-        const loadingMessages = [
-            "MR💥",
-            "SACHINTHA💥",
-            "MADUSHIKA💥",
-            "💥🎧"
-        ];
-
-        let currentMessageIndex = 0;
-        let loadingInterval;
-        let generatedImageUrl = '';  
         const API_BASE_URL = "https://dark-shan-yt.koyeb.app/ai/generate-image-v2?prompt=";
+        let generatedImageUrl = '';
 
-        function updateLoadingMessage() {
-            document.getElementById('loadingMessage').textContent = loadingMessages[currentMessageIndex];
-            currentMessageIndex = (currentMessageIndex + 1) % loadingMessages.length;
-        }
-
-        function stopLoadingInterval() {
-            clearInterval(loadingInterval);
-            document.getElementById('loadingMessage').textContent = loadingMessages[3]; 
-        }
-
-        function generateImage(prompt, isRandom = false) {
-            if (!prompt && !isRandom) {
+        function generateImage(prompt, size) {
+            if (!prompt) {
                 alert("Please enter a prompt!");
                 return;
             }
 
             document.getElementById('loadingMessage').style.display = 'block';
-            loadingInterval = setInterval(updateLoadingMessage, 1000);
-
             document.getElementById('imageContainer').innerHTML = '';
 
-            let finalPrompt = encodeURIComponent(isRandom ? "a beautiful landscape" : prompt);
-            let imageUrl = `${API_BASE_URL}${finalPrompt}`;
+            const finalPrompt = encodeURIComponent(prompt);
+            const imageUrl = `${API_BASE_URL}${finalPrompt}&size=${size}`;
 
             fetch(imageUrl)
-                .then(response => response.blob()) 
+                .then(response => response.blob())
                 .then(blob => {
                     const imageObjectUrl = URL.createObjectURL(blob);
-                    stopLoadingInterval();
+                    document.getElementById('loadingMessage').style.display = 'none';
 
                     const img = new Image();
                     img.src = imageObjectUrl;
                     img.onload = () => {
                         document.getElementById('imageContainer').appendChild(img);
 
-                        if (!isRandom) {
-                            generatedImageUrl = imageObjectUrl;
-                            const downloadBtn = document.getElementById('downloadBtn');
-                            downloadBtn.style.display = 'inline-block';
-                            downloadBtn.innerHTML = "Download";
-                            downloadBtn.onclick = () => {
-                                const link = document.createElement('a');
-                                link.href = generatedImageUrl;
-                                link.download = "sachintha_imggen.png";
-                                link.click();
-                            };
-                        }
+                        generatedImageUrl = imageObjectUrl;
+                        const downloadBtn = document.getElementById('downloadBtn');
+                        downloadBtn.style.display = 'inline-block';
+                        downloadBtn.onclick = () => {
+                            const link = document.createElement('a');
+                            link.href = generatedImageUrl;
+                            link.download = `ai_generated_image_${size}.png`;
+                            link.click();
+                        };
                     };
                 })
                 .catch(error => {
-                    stopLoadingInterval();
                     document.getElementById('loadingMessage').style.display = 'none';
                     alert('Error generating image: ' + error.message);
                 });
@@ -253,33 +209,22 @@
 
         document.getElementById('generateBtn').addEventListener('click', () => {
             const userPrompt = document.getElementById('promptInput').value;
-            if (userPrompt.trim()) {
-                generateImage(userPrompt);
-            }
+            const selectedSize = document.getElementById('sizeSelect').value;
+            generateImage(userPrompt, selectedSize);
         });
-
-        window.onload = () => {
-            generateImage("a beautiful landscape", true);
-
-            setInterval(() => {
-                document.body.style.background = `url('https://source.unsplash.com/1600x900/?nature,forest&random=${Math.random()}') no-repeat center center fixed`;
-                document.body.style.backgroundSize = 'cover';
-            }, 5000);
-        };
     </script>
 
-    <h2 align="center">MR SACHINTHA 💥🎧</h2>
     <div class="social-links">
-      <a href="https://www.youtube.com/@MR_SACHINTHA" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
-      </a>
-      <a href="https://whatsapp.com/channel/0029Vayd8I4LdQekmT7p783d" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-      </a>
+        <a href="https://www.youtube.com/@MR_SACHINTHA" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+        </a>
+        <a href="https://whatsapp.com/channel/0029Vayd8I4LdQekmT7p783d" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+        </a>
     </div>
 
     <div class="footer">
-        1 MR SACHINTHA
+        &copy; SACHINTHA AI IMAGE GENERATOR.
     </div>
 </body>
 </html>
