@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sachintha Madushika</title>
     <style>
+        /* General Styles */
         * {
             margin: 0;
             padding: 0;
@@ -13,18 +14,16 @@
 
         body {
             font-family: Arial, sans-serif;
-            animation: natureBackground 20s infinite;
             min-height: 100vh;
-            background: url('https://source.unsplash.com/1600x900/?nature,forest') no-repeat center center fixed;
-            background-size: cover;
+            background: linear-gradient(45deg, #4CAF50, #2196F3, #FF5722, #9C27B0);
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
         }
 
-        @keyframes natureBackground {
-            0% { background-image: url('https://source.unsplash.com/1600x900/?nature,forest'); }
-            25% { background-image: url('https://source.unsplash.com/1600x900/?nature,mountain'); }
-            50% { background-image: url('https://source.unsplash.com/1600x900/?nature,river'); }
-            75% { background-image: url('https://source.unsplash.com/1600x900/?nature,beach'); }
-            100% { background-image: url('https://source.unsplash.com/1600x900/?nature,forest'); }
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Cover Section */
@@ -289,4 +288,4 @@
         });
     </script>
 </body>
-    </html>
+</html>
