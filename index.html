@@ -26,6 +26,47 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* Loading Page Styles */
+        #loading-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #4CAF50, #2196F3, #FF5722, #9C27B0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading-container {
+            text-align: center;
+            color: white;
+        }
+
+        .progress-bar {
+            width: 300px;
+            height: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px auto;
+        }
+
+        .progress {
+            width: 0;
+            height: 100%;
+            background-color: #4CAF50;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        #loading-page p {
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+
         /* Cover Section */
         .cover {
             position: relative;
@@ -211,6 +252,16 @@
     </style>
 </head>
 <body>
+    <!-- Loading Page -->
+    <div id="loading-page">
+        <div class="loading-container">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
     <!-- Cover Section -->
     <div class="cover">
         <img src="https://i.ibb.co/CpWjyXhJ/4698.jpg" class="cover-photo" alt="Cover">
@@ -277,6 +328,23 @@
     </div>
 
     <script>
+        // Simulate loading progress
+        document.addEventListener("DOMContentLoaded", function () {
+            const progressBar = document.querySelector('.progress');
+            const loadingPage = document.getElementById('loading-page');
+            let width = 0;
+
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    loadingPage.style.display = 'none'; // Hide loading page
+                } else {
+                    width += 10; // Increase progress
+                    progressBar.style.width = width + '%';
+                }
+            }, 200); // Adjust the interval speed as needed
+        });
+
         // Toggle Right Menu
         document.querySelector('.menu-toggle').addEventListener('click', () => {
             document.querySelector('.side-menu').classList.toggle('active');
