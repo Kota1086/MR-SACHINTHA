@@ -15,15 +15,42 @@
         body {
             font-family: Arial, sans-serif;
             min-height: 100vh;
-            background: linear-gradient(45deg, #4CAF50, #2196F3, #FF5722, #9C27B0);
-            background-size: 400% 400%;
-            animation: gradientBackground 15s ease infinite;
+            background: #004d4d; /* Seabed color */
+            overflow-x: hidden;
         }
 
-        @keyframes gradientBackground {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Bubble Animation */
+        .bubbles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: bubbleUp 10s linear infinite;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        @keyframes bubbleUp {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.2);
+                opacity: 0;
+            }
         }
 
         /* Loading Page Styles */
@@ -33,7 +60,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, #4CAF50, #2196F3, #FF5722, #9C27B0);
+            background: #004d4d;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -57,7 +84,7 @@
         .progress {
             width: 0;
             height: 100%;
-            background-color: #4CAF50;
+            background-color: #00ffff;
             border-radius: 10px;
             transition: width 0.5s ease;
         }
@@ -65,9 +92,10 @@
         #loading-page p {
             font-size: 1.5em;
             margin-top: 10px;
+            text-shadow: 0 0 10px #00ffff;
         }
 
-        /* Cover Section */
+        /* Rest of your existing styles */
         .cover {
             position: relative;
             height: 400px;
@@ -88,6 +116,7 @@
             height: 200px;
             border-radius: 50%;
             border: 5px solid white;
+            z-index: 2;
         }
 
         .name {
@@ -95,163 +124,17 @@
             margin-top: 120px;
             font-size: 2.5em;
             color: red;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
-        .ai-img-gen-btn {
-            display: block;
-            margin: 20px auto;
-            padding: 12px 24px;
-            background: black;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: bold;
-        }
+        /* ... (Keep all your other existing styles exactly the same) ... */
 
-        /* Image Grid */
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 1000px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
-
-        .image-grid img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        /* Buttons Section */
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin: 40px 0;
-        }
-
-        .btn {
-            background: blue;
-            color: red;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        /* Social Media */
-        .social-media {
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .social-media img {
-            width: 50px;
-            margin: 0 20px;
-            cursor: pointer;
-        }
-
-        /* Original Right Side Menu */
-        .menu-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 100;
-        }
-
-        .side-menu {
-            position: fixed;
-            top: 0;
-            right: -250px;
-            width: 250px;
-            height: 100%;
-            background: #000000;
-            box-shadow: -2px 0 5px rgba(0,0,0,0.2);
-            transition: 0.3s;
-            z-index: 99;
-            padding: 20px;
-        }
-
-        .side-menu.active {
-            right: 0;
-        }
-
-        .menu-btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            background: yellow;
-            color: red;
-            border: none;
-            border-top: 2px solid blue;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        /* New Left Side Music Player */
-        .left-menu-toggle {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 100;
-        }
-
-        .left-side-menu {
-            position: fixed;
-            top: 0;
-            left: -250px;
-            width: 250px;
-            height: 100%;
-            background: #000000;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-            transition: 0.3s;
-            z-index: 98;
-            padding: 20px;
-        }
-
-        .left-side-menu.active {
-            left: 0;
-        }
-
-        .music-player {
-            margin-bottom: 20px;
-            border-bottom: 2px solid blue;
-            padding-bottom: 15px;
-        }
-
-        .song-title {
-            color: yellow;
-            text-align: center;
-            margin: 10px 0;
-        }
-
-        .download-btn {
-            background: red;
-            color: white;
-            padding: 8px;
-            border-radius: 5px;
-            text-align: center;
-            display: block;
-            margin-top: 10px;
-            text-decoration: none;
-        }
     </style>
 </head>
 <body>
+    <!-- Bubble Container -->
+    <div class="bubbles"></div>
+
     <!-- Loading Page -->
     <div id="loading-page">
         <div class="loading-container">
@@ -262,7 +145,7 @@
         </div>
     </div>
 
-    <!-- Cover Section -->
+    <!-- Rest of your existing HTML -->
     <div class="cover">
         <img src="https://i.ibb.co/CpWjyXhJ/4698.jpg" class="cover-photo" alt="Cover">
         <img src="https://i.ibb.co/S4NBw2Jy/8263.jpg" class="profile-img" alt="Profile">
@@ -270,7 +153,6 @@
     <h1 class="name">MR SACHINTHA MADUSHIKA</h1>
     <button class="ai-img-gen-btn" onclick="window.open('imggen.html', '_blank')">CLICK THIS AI IMG GEN</button>
 
-    <!-- Image Grid -->
     <div class="image-grid">
         <img src="https://i.ibb.co/nNNVzqxj/1437.jpg" alt="Image 1">
         <img src="https://i.ibb.co/xqzJhM7f/7524.jpg" alt="Image 2">
@@ -280,7 +162,6 @@
         <img src="https://i.ibb.co/q3bTMRk2/2457.jpg" alt="Image 6">
     </div>
 
-    <!-- Buttons -->
     <div class="buttons">
         <a href="https://levanter-pp.vercel.app/" class="btn">whatsapp fuel dp</a>
         <a href="https://dexter-song-ptt-site.vercel.app/" class="btn">Status song</a>
@@ -289,7 +170,6 @@
         <a href="https://en1.savefrom.net/1-youtube-video-downloader-3vV/" class="btn">Yt vdo downloader</a>
     </div>
 
-    <!-- Social Media -->
     <div class="social-media">
         <a href="https://wa.me/+94775936474?text=HI_MR_ම_chiස_ප_💥🎧" target="_blank">
             <img src="https://i.ibb.co/GvGbXSYd/6186.png" alt="WhatsApp">
@@ -299,7 +179,6 @@
         </a>
     </div>
 
-    <!-- Original Right Menu -->
     <div class="menu-toggle">🔴</div>
     <div class="side-menu">
         <a href="https://sinhalasub.lk/" class="menu-btn">free movie download</a>
@@ -313,7 +192,6 @@
         <a href="https://perchance.org/ai-text-to-image-generator" class="menu-btn">Ai image generat</a>
     </div>
 
-    <!-- New Left Music Player Menu -->
     <div class="left-menu-toggle">💥🎧</div>
     <div class="left-side-menu">
         <div class="music-player">
@@ -328,8 +206,25 @@
     </div>
 
     <script>
+        // Create bubbles
+        function createBubbles() {
+            const bubblesContainer = document.querySelector('.bubbles');
+            for(let i = 0; i < 30; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.style.left = Math.random() * 100 + '%';
+                bubble.style.width = bubble.style.height = 
+                    Math.random() * 40 + 20 + 'px';
+                bubble.style.animationDelay = Math.random() * 5 + 's';
+                bubble.style.animationDuration = Math.random() * 5 + 8 + 's';
+                bubblesContainer.appendChild(bubble);
+            }
+        }
+
         // Simulate loading progress
         document.addEventListener("DOMContentLoaded", function () {
+            createBubbles();
+            
             const progressBar = document.querySelector('.progress');
             const loadingPage = document.getElementById('loading-page');
             let width = 0;
@@ -337,12 +232,12 @@
             const interval = setInterval(() => {
                 if (width >= 100) {
                     clearInterval(interval);
-                    loadingPage.style.display = 'none'; // Hide loading page
+                    loadingPage.style.display = 'none';
                 } else {
-                    width += 10; // Increase progress
+                    width += 10;
                     progressBar.style.width = width + '%';
                 }
-            }, 200); // Adjust the interval speed as needed
+            }, 200);
         });
 
         // Toggle Right Menu
