@@ -1,161 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SACHINTHA IMG GEN</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SACHINTHA IMG GEN</title>
+  <link rel="icon" href="https://i.ibb.co/0yTySzjZ/20250219-091554.png" type="image/png">
 
-    <!-- Favicon for Browser Tab -->
-    <link rel="icon" href="https://camo.githubusercontent.com/9ecc3924d92c7a021ed8b4e5bb25190f3f375546cf3ad12d12d678c090ff1d39/68747470733a2f2f692e6962622e636f2f30795479537a6a5a2f32303235303231392d3039313535342e706e67" type="image/png">
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <style>
-        /* Body styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #000; /* Black background */
-            color: #fff;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
+    html, body {
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+    }
 
-        /* Header styles */
-        h1 {
-            color: #ff4757; /* Red color for header */
-            font-size: 2.5rem;
-            margin-top: 20px;
-            animation: fadeIn 2s ease-in-out;
-        }
+    body {
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      animation: aiBackground 10s infinite linear;
+      color: #fff;
+      text-align: center;
+    }
 
-        /* Keyframe animation for fading in */
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
+    @keyframes aiBackground {
+      0% { background: linear-gradient(60deg, #0f0f0f, #ff4757); }
+      50% { background: linear-gradient(60deg, #1a1a1a, #2f3542); }
+      100% { background: linear-gradient(60deg, #0f0f0f, #ff4757); }
+    }
 
-        /* Chat container styling */
-        #chat-container {
-            width: 90%;
-            max-width: 500px;
-            margin: 20px auto;
-            border-radius: 15px;
-            background: #1e1e1e;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3); /* Red shadow */
-        }
+    /* Loading Screen */
+    #loadingScreen {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: black;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
 
-        /* Input field styling */
-        input, select {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            outline: none;
-            border-radius: 8px;
-            background: #333;
-            color: #fff;
-            font-size: 16px;
-        }
+    .loader-circle {
+      border: 8px solid rgba(255, 255, 255, 0.1);
+      border-top: 8px solid #ff4757;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      animation: spin 2s linear infinite;
+      margin-bottom: 30px;
+    }
 
-        /* Button styling */
-        button {
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            background: #ff4757; /* Red color */
-            color: #fff;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: background 0.3s ease;
-        }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 
-        button:hover {
-            background: #ff6b81; /* Lighter red on hover */
-        }
+    .falling-numbers {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      color: #00ffcc;
+      opacity: 0.2;
+      animation: fall 3s linear infinite;
+    }
 
-        /* Loading text styling */
-        .loading {
-            font-size: 18px;
-            color: #ffa502; /* Orange color */
-            margin-top: 15px;
-            animation: pulse 1.5s infinite;
-        }
+    @keyframes fall {
+      0% { top: -100px; opacity: 0.1; }
+      100% { top: 100%; opacity: 0; }
+    }
 
-        /* Keyframe animation for pulse effect */
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
+    .loader-text {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff4757;
+      animation: pulseText 1.5s infinite;
+    }
 
-        /* Image container */
-        .image-container img {
-            max-width: 100%;
-            border-radius: 15px;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3); /* Red shadow */
-        }
+    @keyframes pulseText {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
 
-        /* Download button styling */
-        .download-button {
-            margin-top: 20px;
-            padding: 15px 30px;
-            background: #ff4757; /* Red color */
-            border-radius: 8px;
-            color: #fff;
-            cursor: pointer;
-            font-size: 18px;
-            display: inline-block;
-            border: none;
-            transition: transform 0.3s ease;
-        }
+    /* Main Content */
+    #mainPage {
+      display: none;
+      padding: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
 
-        .download-button:hover {
-            transform: scale(1.05); /* Slightly enlarge on hover */
-        }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
 
-        /* Social links styles */
-        .social-links {
-            margin-top: 30px;
-        }
+    h1 {
+      font-size: 2.5rem;
+      color: #ff6b81;
+      animation: flicker 2s infinite;
+    }
 
-        .social-links a {
-            margin: 0 10px;
-            display: inline-block;
-        }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
 
-        .social-links img {
-            width: 40px;
-            height: 40px;
-            transition: transform 0.3s ease;
-        }
+    .animated-label {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
 
-        .social-links img:hover {
-            transform: scale(1.2); /* Enlarge icons on hover */
-        }
+    #chat-container {
+      width: 90%;
+      max-width: 500px;
+      margin: auto;
+      background: linear-gradient(145deg, #1f1f1f, #2e2e2e);
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 71, 87, 0.4);
+      padding: 30px;
+      margin-top: 30px;
+      animation: fadeIn 2s ease;
+    }
 
-        /* Footer styles */
-        .footer {
-            margin-top: 30px;
-            font-size: 14px;
-            color: #888;
-        }
-    </style>
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background: #2f3542;
+      color: #fff;
+      margin-bottom: 15px;
+      font-size: 16px;
+      box-shadow: 0 0 10px #ff4757;
+      animation: glowInput 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowInput {
+      from { box-shadow: 0 0 5px #ff4757; }
+      to { box-shadow: 0 0 15px #ff6b81; }
+    }
+
+    button {
+      padding: 12px 20px;
+      background: #ff4757;
+      border: none;
+      color: white;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      animation: pulseText 2s infinite;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .image-container img {
+      max-width: 100%;
+      margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 71, 87, 0.3);
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    #downloadBtn {
+      margin-top: 20px;
+    }
+
+    .footer, .mrSachinthaFooter {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #888;
+      animation: flicker 3s infinite;
+    }
+
+    /* Social links */
+    .social-links {
+      margin-top: 30px;
+    }
+
+    .social-links img {
+      width: 40px;
+      height: 40px;
+      margin: 0 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .social-links img:hover {
+      transform: scale(1.2);
+    }
+
+  </style>
 </head>
 <body>
+
+  <!-- Loading Screen -->
+  <div id="loadingScreen">
+    <div class="loader-circle"></div>
+    <div class="falling-numbers">010101101010101</div>
+    <div class="loader-text">MR SACHINTHA</div>
+  </div>
+
+  <!-- Main Page -->
+  <div id="mainPage">
     <h1>SACHINTHA IMG GEN</h1>
 
     <div id="chat-container">
-        <input type="text" id="promptInput" placeholder="Type your prompt...">
-        <select id="sizeSelect">
-            <option value="512x512">512x512</option>
-            <option value="1024x1024">1024x1024</option>
-            <option value="1920x1080">1920x1080</option>
-        </select>
-        <button id="generateBtn">Generate Image</button>
+      <input type="text" id="promptInput" placeholder="Type your prompt...">
+      <select id="sizeSelect">
+        <option value="512x512">512x512</option>
+        <option value="1024x1024">1024x1024</option>
+        <option value="1920x1080">1920x1080</option>
+      </select>
+      <button id="generateBtn">Generate Image</button>
     </div>
 
     <div class="loading" id="loadingMessage" style="display: none;">Generating...</div>
@@ -163,90 +230,86 @@
 
     <div id="downloadBtn" class="download-button" style="display: none;">Download Image</div>
 
-    <script>
-        const API_BASE_URL = "https://dark-shan-yt.koyeb.app/ai/generate-image-v2?prompt=";
-        let generatedImageUrl = '';
-
-        function generateImage(prompt, size) {
-            if (!prompt) {
-                alert("Please enter a prompt!");
-                return;
-            }
-
-            document.getElementById('loadingMessage').style.display = 'block';
-            document.getElementById('imageContainer').innerHTML = '';
-
-            const finalPrompt = encodeURIComponent(prompt);
-            const imageUrl = `${API_BASE_URL}${finalPrompt}&size=${size}`;
-
-            fetch(imageUrl)
-                .then(response => response.blob())
-                .then(blob => {
-                    const imageObjectUrl = URL.createObjectURL(blob);
-                    document.getElementById('loadingMessage').style.display = 'none';
-
-                    const img = new Image();
-                    img.src = imageObjectUrl;
-                    img.onload = () => {
-                        // Create a canvas element
-                        const canvas = document.createElement('canvas');
-                        const ctx = canvas.getContext('2d');
-
-                        // Set canvas dimensions to match the image
-                        canvas.width = img.width;
-                        canvas.height = img.height;
-
-                        // Draw the image on the canvas
-                        ctx.drawImage(img, 0, 0);
-
-                        // Add watermark text
-                        ctx.font = '30px Arial';
-                        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)'; // Semi-transparent white
-                        ctx.textAlign = 'center';
-                        ctx.fillText('MR SACHINTHA', canvas.width / 2, canvas.height - 20);
-
-                        // Convert canvas to image
-                        const watermarkedImage = new Image();
-                        watermarkedImage.src = canvas.toDataURL();
-
-                        // Append the watermarked image to the container
-                        document.getElementById('imageContainer').appendChild(watermarkedImage);
-
-                        generatedImageUrl = watermarkedImage.src;
-                        const downloadBtn = document.getElementById('downloadBtn');
-                        downloadBtn.style.display = 'inline-block';
-                        downloadBtn.onclick = () => {
-                            const link = document.createElement('a');
-                            link.href = generatedImageUrl;
-                            link.download = `ai_generated_image_${size}.png`;
-                            link.click();
-                        };
-                    };
-                })
-                .catch(error => {
-                    document.getElementById('loadingMessage').style.display = 'none';
-                    alert('Error generating image: ' + error.message);
-                });
-        }
-
-        document.getElementById('generateBtn').addEventListener('click', () => {
-            const userPrompt = document.getElementById('promptInput').value;
-            const selectedSize = document.getElementById('sizeSelect').value;
-            generateImage(userPrompt, selectedSize);
-        });
-    </script>
-
     <div class="social-links">
-        <a href="https://www.youtube.com/@MR_SACHINTHA" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
-        </a>
-        <a href="https://whatsapp.com/channel/0029Vayd8I4LdQekmT7p783d" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-        </a>
+      <a href="https://www.youtube.com/@MR_SACHINTHA" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+      </a>
+      <a href="https://whatsapp.com/channel/0029Vayd8I4LdQekmT7p783d" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+      </a>
     </div>
 
-    <div class="footer">
-        &copy; SACHINTHA AI IMAGE GENERATOR.
-    </div>
+    <div class="mrSachinthaFooter">MR SACHINTHA</div>
+    <div class="footer">&copy; SACHINTHA AI IMAGE GENERATOR.</div>
+  </div>
+
+  <!-- JavaScript Logic -->
+  <script>
+    const API_BASE_URL = "https://dark-shan-yt.koyeb.app/ai/generate-image-v2?prompt=";
+    let generatedImageUrl = '';
+
+    window.onload = () => {
+      setTimeout(() => {
+        document.getElementById("loadingScreen").style.display = "none";
+        document.getElementById("mainPage").style.display = "block";
+      }, 3500);
+    };
+
+    function generateImage(prompt, size) {
+      if (!prompt) {
+        alert("Please enter a prompt!");
+        return;
+      }
+
+      document.getElementById('loadingMessage').style.display = 'block';
+      document.getElementById('imageContainer').innerHTML = '';
+
+      const finalPrompt = encodeURIComponent(prompt);
+      const imageUrl = `${API_BASE_URL}${finalPrompt}&size=${size}`;
+
+      fetch(imageUrl)
+        .then(response => response.blob())
+        .then(blob => {
+          const imageObjectUrl = URL.createObjectURL(blob);
+          document.getElementById('loadingMessage').style.display = 'none';
+
+          const img = new Image();
+          img.src = imageObjectUrl;
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            ctx.font = '30px Arial';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.textAlign = 'center';
+            ctx.fillText('MR SACHINTHA', canvas.width / 2, canvas.height - 20);
+            const watermarkedImage = new Image();
+            watermarkedImage.src = canvas.toDataURL();
+            document.getElementById('imageContainer').appendChild(watermarkedImage);
+            generatedImageUrl = watermarkedImage.src;
+            const downloadBtn = document.getElementById('downloadBtn');
+            downloadBtn.style.display = 'inline-block';
+            downloadBtn.onclick = () => {
+              const link = document.createElement('a');
+              link.href = generatedImageUrl;
+              link.download = `ai_generated_image_${size}.png`;
+              link.click();
+            };
+          };
+        })
+        .catch(error => {
+          document.getElementById('loadingMessage').style.display = 'none';
+          alert('Error generating image: ' + error.message);
+        });
+    }
+
+    document.getElementById('generateBtn').addEventListener('click', () => {
+      const userPrompt = document.getElementById('promptInput').value;
+      const selectedSize = document.getElementById('sizeSelect').value;
+      generateImage(userPrompt, selectedSize);
+    });
+  </script>
 </body>
 </html>
