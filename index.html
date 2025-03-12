@@ -1,19 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sachintha Madushika</title>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
-    /* Combined CSS Styles */
-    :root {
-      --primary: #0088cc;
-      --dark: #0a0a0a;
-      --dark-2: #1a1a1a;
-      --main-gradient: linear-gradient(45deg, #00ff88, #0099ff, #ff00ff);
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -25,7 +16,6 @@
       min-height: 100vh;
       background: #000;
       overflow-x: hidden;
-      color: #fff;
     }
 
     /* Zodiac background effect */
@@ -45,102 +35,6 @@
       font-size: 2em;
       color: rgba(255, 255, 255, 0.2);
       animation: floatSymbol 20s linear infinite;
-    }
-
-    @keyframes floatSymbol {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-      50% { opacity: 1; }
-      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-    }
-
-    /* Tabs Navigation */
-    .tab-container {
-
-  <!-- Loading Page -->
-  <div id="loading-page">
-    <div class="loading-container">
-      <div class="progress-bar"><div class="progress"></div></div>
-      <p>Loading...</p>
-    </div>
-  </div>
-
-  <!-- Tabs Navigation -->
-  <div class="tab-container">
-    <button class="tab-btn active" onclick="showSection('home')">HOME</button>
-    <button class="tab-btn" onclick="showSection('message')">MESSAGE</button>
-    <button class="tab-btn" onclick="showSection('imageGen')">AI IMAGE GEN</button>
-    <button class="tab-btn" onclick="showSection('wallpaper')">WALLPAPERS</button>
-  </div>
-
-  <!-- Home Section -->
-  <section id="homeSection" class="content-section active">
-    <div class="cover">
-      <img src="https://i.ibb.co/cpBZt4c/didulamd.jpg" class="cover-photo" alt="Cover">
-      <img src="https://i.ibb.co/6QCWXMG/didulamd.jpg" class="profile-img" alt="Profile">
-    </div>
-    <h1 class="name">MR SACHINTHA MADUSHIKA</h1>
-    
-    <div class="image-grid">
-      <!-- ... original image grid ... -->
-    </div>
-
-    <div class="buttons">
-      <!-- ... original buttons ... -->
-    </div>
-  </section>
-
-  <!-- Message Section -->
-  <section id="messageSection" class="content-section">
-    <div class="container">
-      <h2 data-aos="zoom-in">MR SACHINTHA</h2>
-      <form id="telegramForm">
-        <!-- ... message form elements ... -->
-      </form>
-    </div>
-  </section>
-
-  <!-- Image Generator Section -->
-  <section id="imageGenSection" class="content-section">
-    <div id="mainPage">
-      <h1>SACHINTHA IMG GEN</h1>
-      <!-- ... image generator elements ... -->
-    </div>
-  </section>
-
-  <!-- Wallpaper Section -->
-  <section id="wallpaperSection" class="content-section">
-    <div class="gallery wallpaper-gallery">
-      <!-- ... wallpaper images ... -->
-    </div>
-  </section>
-
-  <!-- Combined JavaScript -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    // Tab Navigation
-    function showSection(sectionId) {
-      document.querySelectorAll('.content-section').forEach(section => {
-        section.classList.remove('active');
-      });
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      document.getElementById(sectionId + 'Section').classList.add('active');
-      event.currentTarget.classList.add('active');
-    }
-
-    // Initialize AOS
-    AOS.init({ duration: 1000, once: true, easing: 'ease-in-out' });
-
-    // ... Include all other necessary JavaScript functions from previous codes ...
-
-    // Initialization code
-    document.addEventListener("DOMContentLoaded", function () {
-      // ... original initialization code ...
-    });
-  </script>
-</body>
-</html>      animation: floatSymbol 20s linear infinite;
     }
 
     @keyframes floatSymbol {
@@ -444,6 +338,8 @@
   </div>
   
    <button class="ai-img-gen-btn" onclick="window.open('message.html', '_blank')">MSG OWNER</button>
+   
+   <button class="ai-img-gen-btn" onclick="window.open('wallpaper.html', '_blank')">WALPPR DOWN</button>
 
   <div class="buttons">
     <a href="https://levanter-pp.vercel.app/" class="btn">whatsapp fuel dp</a>
