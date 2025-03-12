@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MR SACHINTHA</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0088cc;
+      --dark: #0a0a0a;
+      --dark-2: #1a1a1a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: var(--dark);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      transition: opacity 0.5s;
+    }
+
+    .progress-bar {
+      width: 300px;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress {
+      width: 0%;
+      height: 100%;
+      background: var(--primary);
+      transition: width 0.3s;
+    }
+
+    .floating-message {
+      position: fixed;
+      opacity: 0.1;
+      font-size: 24px;
+      animation: float 15s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      from { transform: translateY(100vh) rotate(0deg); }
+      to { transform: translateY(-100vh) rotate(360deg); }
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 50px 20px;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      text-shadow: 0 0 15px rgba(0,136,204,0.5);
+    }
+
+    form {
+      background: var(--dark-2);
+      padding: 30px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transform: translateY(50px);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    form:hover {
+      transform: translateY(0);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 15px;
+      margin: 15px 0;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 15px rgba(0,136,204,0.3);
+      transform: scale(1.02);
+    }
+
+    button {
+      background: var(--primary);
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button:hover {
+      background: #0077b3;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,136,204,0.3);
+    }
+
+    button::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300px;
+      height: 300px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      animation: ripple 0.6s ease-out;
+    }
+
+    @keyframes ripple {
+      from { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+      to { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading-screen">
+    <div class="progress-bar">
+      <div class="progress"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 data-aos="zoom-in">MR SACHINTHA</h2>
+    <form id="telegramForm" data-aos="fade-up" data-aos-delay="200">
+      <input type="text" id="name" placeholder="Your Name" required data-aos="fade-right" data-aos-delay="300">
+      <textarea id="message" placeholder="Your Message" rows="5" required data-aos="fade-left" data-aos-delay="400"></textarea>
+      <button type="submit" data-aos="zoom-in" data-aos-delay="500">Send Message</button>
+    </form>
+  </div>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Loading Screen
+    let progress = 0;
+    const progressBar = document.querySelector('.progress');
+    const loadingScreen = document.querySelector('.loading-screen');
+    const container = document.querySelector('.container');
+
+    const loadingInterval = setInterval(() => {
+      progress += Math.random() * 20;
+      if(progress >= 100) {
+        progress = 100;
+        clearInterval(loadingInterval);
+        setTimeout(() => {
+          loadingScreen.style.opacity = '0';
+          setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            container.style.opacity = '1';
+          }, 500);
+        }, 500);
+      }
+      progressBar.style.width = progress + '%';
+    }, 200);
+
+    // Floating Messages
+    const messages = ['Hello!', 'Contact Me', 'I,M💥', 'SACHINTHA❤️', 'MADUSHUKA💥🎧'];
+    setInterval(() => {
+      const message = document.createElement('div');
+      message.className = 'floating-message';
+      message.textContent = messages[Math.floor(Math.random() * messages.length)];
+      message.style.left = Math.random() * 100 + 'vw';
+      message.style.animationDuration = (Math.random() * 10 + 5) + 's';
+      message.style.fontSize = (Math.random() * 20 + 15) + 'px';
+      document.body.appendChild(message);
+      
+      setTimeout(() => message.remove(), 15000);
+    }, 1500);
+
+    // Form Submission
+    const botToken = "7578190613:AAHG-Sq47FqfTx_6Eo6s_cQz0o8h_Dc1-mc";
+    const chatId = "8065591428";
+
+    document.getElementById("telegramForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const message = document.getElementById("message").value.trim();
+      const text = `New Message from Website:\n\nName: ${name}\nMessage: ${message}`;
+
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: chatId, text: text })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.ok) {
+          alert("Message sent successfully!");
+          document.getElementById("telegramForm").reset();
+        } else {
+          alert("Failed to send message. Please try again.");
+        }
+      })
+      .catch(error => {
+        alert("An error occurred. Please check your internet connection or try again later.");
+        console.error(error);
+      });
+    });
+
+    // Initialize AOS
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-in-out'
+    });
+  </script>
+</body>
+</html>
