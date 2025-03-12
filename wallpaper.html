@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SACHINTHA WLPPR DOWN</title>
+    <style>
+        :root {
+            --main-gradient: linear-gradient(45deg, #00ff88, #0099ff, #ff00ff);
+        }
+
+        body {
+            margin: 0;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Arial', sans-serif;
+            min-height: 200vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1s;
+        }
+
+        .progress-bar {
+            width: 300px;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background: var(--main-gradient);
+            transition: width 0.3s ease;
+            animation: progressGlow 2s infinite;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            padding: 100px 5%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: 1s;
+        }
+
+        .photo-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            aspect-ratio: 3/4;
+            margin: 15px;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: 1s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .photo-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--main-gradient);
+            z-index: -1;
+            animation: borderAnim 3s linear infinite;
+            border-radius: 15px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+            border-radius: 15px;
+            pointer-events: none;
+        }
+
+        .download-btn {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 45px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #0099ff, #00ff88);
+            color: white;
+            cursor: pointer;
+            opacity: 0;
+            transition: 0.5s;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 4px 20px rgba(0, 153, 255, 0.4);
+            animation: btnPulse 2s infinite;
+        }
+
+        .photo-container:hover .download-btn {
+            opacity: 1;
+            bottom: 20px;
+        }
+
+        @keyframes borderAnim {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes btnPulse {
+            0% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+            100% { transform: translateX(-50%) scale(1); }
+        }
+
+        @keyframes progressGlow {
+            0% { box-shadow: 0 0 10px rgba(0,255,136,0.5); }
+            50% { box-shadow: 0 0 20px rgba(0,255,136,0.8); }
+            100% { box-shadow: 0 0 10px rgba(0,255,136,0.5); }
+        }
+
+        .show {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <h1 style="color: white; margin-bottom: 30px; animation: textGlow 2s infinite alternate;">SACHINTHA WLPPR DOWN</h1>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
+
+    <div class="gallery">
+        <!-- Image containers will be added here -->
+    </div>
+
+    <script>
+        // Loading animation
+        let progress = 0;
+        const loader = document.querySelector('.loader');
+        const progressBar = document.querySelector('.progress');
+        const gallery = document.querySelector('.gallery');
+
+        const interval = setInterval(() => {
+            progress += 2;
+            progressBar.style.width = `${progress}%`;
+            if(progress >= 100) {
+                clearInterval(interval);
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 1000);
+                gallery.classList.add('show');
+            }
+        }, 50);
+
+        // Image data (fixed URLs)
+        const imageUrls = [
+            'https://i.ibb.co/fdJtqyN7/4192.jpg',
+            'https://i.ibb.co/Jj7mHpKR/9955.jpg',
+            'https://i.ibb.co/G4zgB5tS/9352.jpg',
+            'https://i.ibb.co/DHBMt6c3/2745.jpg',
+            'https://i.ibb.co/8LYGw4nD/7615.jpg',
+            'https://i.ibb.co/k6gq0WQ2/5374.jpg',
+            'https://i.ibb.co/1JQBGrvs/4659.jpg',
+            'https://i.ibb.co/C3NmZYS0/9248.jpg',
+            'https://i.ibb.co/G33KgGqK/245.jpg',
+            'https://i.ibb.co/svxbsWSg/4341.jpg',
+            'https://i.ibb.co/39kZvffC/7460.jpg',
+            'https://i.ibb.co/Tq1vjFpH/6402.jpg',
+            'https://i.ibb.co/9HKN45DY/1133.jpg'
+        ];
+
+        // Create gallery items
+        const galleryContainer = document.querySelector('.gallery');
+        imageUrls.forEach(url => {
+            const container = document.createElement('div');
+            container.className = 'photo-container';
+            container.innerHTML = `
+                <img src="${url}" alt="Wallpaper">
+                <button class="download-btn" onclick="downloadImage('${url}')">DOWNLOAD</button>
+            `;
+            galleryContainer.appendChild(container);
+        });
+
+        // Download function
+        async function downloadImage(url) {
+            try {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                const downloadUrl = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = downloadUrl;
+                link.download = 'wallpaper.jpg';
+                document.body.appendChild(link);
+                link.click();
+                window.URL.revokeObjectURL(downloadUrl);
+                document.body.removeChild(link);
+            } catch (error) {
+                console.error('Download failed:', error);
+            }
+        }
+
+        // Scroll animation with Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if(entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('show');
+                    }, index * 150);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.photo-container').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Add initial animation after load
+        setTimeout(() => {
+            document.querySelectorAll('.photo-container').forEach((item, index) => {
+                item.style.transitionDelay = `${index * 0.1}s`;
+            });
+        }, 1000);
+    </script>
+</body>
+</html>
