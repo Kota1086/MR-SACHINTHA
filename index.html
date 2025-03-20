@@ -10,7 +10,6 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: Arial, sans-serif;
       min-height: 100vh;
@@ -18,7 +17,6 @@
       overflow-x: hidden;
     }
 
-    /* Zodiac background effect */
     .zodiac-bg {
       position: fixed;
       top: 0;
@@ -51,7 +49,6 @@
       }
     }
 
-    /* Your existing styles below... */
     #loading-page {
       position: fixed;
       top: 0;
@@ -215,102 +212,11 @@
       margin: 0 20px;
       cursor: pointer;
     }
-
-    .menu-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      font-size: 24px;
-      cursor: pointer;
-      z-index: 100;
-    }
-
-    .side-menu {
-      position: fixed;
-      top: 0;
-      right: -250px;
-      width: 250px;
-      height: 100%;
-      background: #000000;
-      box-shadow: -2px 0 5px rgba(0,0,0,0.2);
-      transition: 0.3s;
-      z-index: 99;
-      padding: 20px;
-    }
-
-    .side-menu.active {
-      right: 0;
-    }
-
-    .menu-btn {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      margin: 10px 0;
-      background: yellow;
-      color: red;
-      border: none;
-      border-top: 2px solid blue;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-    }
-
-    .left-menu-toggle {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      font-size: 24px;
-      cursor: pointer;
-      z-index: 100;
-    }
-
-    .left-side-menu {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      width: 250px;
-      height: 100%;
-      background: #000000;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-      transition: 0.3s;
-      z-index: 98;
-      padding: 20px;
-    }
-
-    .left-side-menu.active {
-      left: 0;
-    }
-
-    .music-player {
-      margin-bottom: 20px;
-      border-bottom: 2px solid blue;
-      padding-bottom: 15px;
-    }
-
-    .song-title {
-      color: yellow;
-      text-align: center;
-      margin: 10px 0;
-    }
-
-    .download-btn {
-      background: red;
-      color: white;
-      padding: 8px;
-      border-radius: 5px;
-      text-align: center;
-      display: block;
-      margin-top: 10px;
-      text-decoration: none;
-    }
   </style>
 </head>
 <body>
-  <!-- Zodiac background -->
   <div class="zodiac-bg" id="zodiac-bg"></div>
 
-  <!-- Loading Page -->
   <div id="loading-page">
     <div class="loading-container">
       <div class="progress-bar"><div class="progress"></div></div>
@@ -318,15 +224,14 @@
     </div>
   </div>
 
-  <!-- Rest of your content unchanged -->
-  <!-- Cover Section -->
   <div class="cover">
     <img src="https://i.ibb.co/cpBZt4c/didulamd.jpg" class="cover-photo" alt="Cover">
     <img src="https://i.ibb.co/6QCWXMG/didulamd.jpg" class="profile-img" alt="Profile">
   </div>
+
   <h1 class="name">MR SACHINTHA MADUSHIKA</h1>
+
   <button class="ai-img-gen-btn" onclick="window.open('imggen.html', '_blank')">CLICK THIS AI IMG GEN</button>
- 
 
   <div class="image-grid">
     <img src="https://i.ibb.co/nNNVzqxj/1437.jpg">
@@ -336,10 +241,9 @@
     <img src="https://i.ibb.co/mVvfrB73/9985.jpg">
     <img src="https://i.ibb.co/q3bTMRk2/2457.jpg">
   </div>
-  
-   <button class="ai-img-gen-btn" onclick="window.open('message.html', '_blank')">MSG OWNER</button>
-   
-   <button class="ai-img-gen-btn" onclick="window.open('wallpaper.html', '_blank')">WALPPR DOWN</button>
+
+  <button class="ai-img-gen-btn" onclick="window.open('message.html', '_blank')">MSG OWNER</button> 
+  <button class="ai-img-gen-btn" onclick="window.open('wallpaper.html', '_blank')">WALPPR DOWN</button>
 
   <div class="buttons">
     <a href="https://levanter-pp.vercel.app/" class="btn">whatsapp fuel dp</a>
@@ -350,38 +254,9 @@
   </div>
 
   <div class="social-media">
-    <a href="https://wa.me/+94775936474?text=HI_MR_SACHINTHA💥🎧" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" alt="WhatsApp">
-    </a>
     <a href="mailto:gsmadushikaz@gmail.com">
       <img src="https://i.ibb.co/pjffsjZ0/5675.png" alt="Email">
     </a>
-  </div>
-
-  <div class="menu-toggle">🔴</div>
-  <div class="side-menu">
-    <a href="https://sinhalasub.lk/" class="menu-btn">free movie download</a>
-    <a href="https://vocalremover.org/" class="menu-btn">song vocal remove</a>
-    <a href="https://levanter-pp.vercel.app/" class="menu-btn">whatsapp fuel dp</a>
-    <a href="https://dexter-song-ptt-site.vercel.app/" class="menu-btn">Status song</a>
-    <a href="https://bot-hosting.net" class="menu-btn">Free bot hosting site</a>
-    <a href="https://www.fdown.net/" class="menu-btn">Fb vdo download</a>
-    <a href="https://en1.savefrom.net/1-youtube-video-downloader-3vV/" class="menu-btn">Yt vdo downloader</a>
-    <a href="https://www.remove.bg/" class="menu-btn">Photo BG remove</a>
-    <a href="https://perchance.org/ai-text-to-image-generator" class="menu-btn">Ai image generat</a>
-  </div>
-
-  <div class="left-menu-toggle">💥🎧</div>
-  <div class="left-side-menu">
-    <div class="music-player">
-      <h3 class="song-title">බන්ධනාගාරෙ</h3>
-      <audio controls style="width: 100%">
-        <source src="https://files.catbox.moe/c35a3c.mp3" type="audio/mpeg">
-      </audio>
-      <a href="https://files.catbox.moe/c35a3c.mp3" download class="download-btn">
-        Download Song ⬇️
-      </a>
-    </div>
   </div>
 
   <script>
@@ -400,7 +275,6 @@
         }
       }, 200);
 
-      // Generate random zodiac symbols
       const symbols = ['♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓'];
       const zodiacBg = document.getElementById('zodiac-bg');
       for (let i = 0; i < 50; i++) {
@@ -412,14 +286,6 @@
         span.innerText = symbols[Math.floor(Math.random() * symbols.length)];
         zodiacBg.appendChild(span);
       }
-    });
-
-    document.querySelector('.menu-toggle').addEventListener('click', () => {
-      document.querySelector('.side-menu').classList.toggle('active');
-    });
-
-    document.querySelector('.left-menu-toggle').addEventListener('click', () => {
-      document.querySelector('.left-side-menu').classList.toggle('active');
     });
   </script>
 </body>
