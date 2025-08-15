@@ -2,211 +2,295 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>I ❤ You, Saduni — Ultra Edition</title>
+<title>Hey Saduni 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
   :root{
-    --pink:#ff4d8d; --pink2:#ff9bd1; --violet:#8a63ff; --bg:#0e0b1f; --glass:rgba(255,255,255,.14); --white:#fff;
-    --shadow:0 20px 60px rgba(0,0,0,.45);
+    --bg:#0a0a16;
+    --primary:#ff5ea8;
+    --secondary:#8a63ff;
+    --glass1:rgba(255,255,255,.12);
+    --glass2:rgba(255,255,255,.06);
+    --txt:#f8f8ff;
+    --shadow:0 24px 60px rgba(0,0,0,.55);
   }
   *{box-sizing:border-box}
   html,body{height:100%}
-  body{margin:0;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Inter,Arial;color:var(--white);background:var(--bg);overflow:hidden}
+  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Arial;color:var(--txt);background:var(--bg);overflow:hidden}
 
-  /* ===== STAGE (Background photo + gradients + subtle motion) ===== */
-  .stage{position:fixed;inset:0;z-index:-2}
-  .bg-img, .bg-grad, .bg-noise{position:absolute;inset:0}
-  .bg-img{
-    background:url('https://i.ibb.co/svhwTgM/saduni.jpg') center/cover no-repeat fixed;
-    filter:blur(10px) brightness(.65) saturate(1.1);
-    transform:scale(1.06);
-  }
-  .bg-grad{
+  /* ===== Parallax layers ===== */
+  .layer{position:fixed;inset:0;pointer-events:none}
+  .grad{
     background:
-      radial-gradient(1000px 600px at 15% 25%, rgba(255,77,141,.28), transparent 60%),
-      radial-gradient(1000px 600px at 85% 80%, rgba(138,99,255,.26), transparent 60%),
-      linear-gradient(120deg, rgba(14,11,31,.92), rgba(14,11,31,.6) 60%, rgba(14,11,31,.92));
-    mix-blend:screen;
-    animation:bgShift 24s ease-in-out infinite;
+      radial-gradient(1200px 800px at 15% 20%, rgba(255,94,168,.24), transparent 60%),
+      radial-gradient(1000px 700px at 85% 80%, rgba(138,99,255,.2), transparent 60%),
+      linear-gradient(120deg, #090913, #141428 60%, #090913);
+    z-index:-3;
   }
-  @keyframes bgShift { 0%,100%{transform:translate3d(0,0,0)} 50%{transform:translate3d(0,-10px,0)} }
-  .bg-noise{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity=".04"/></svg>');mix-blend-mode:overlay;opacity:.15}
+  .photo{background-position:center;background-size:cover;filter:blur(8px) brightness(.62) saturate(1.1);transform:scale(1.06);opacity:.0;transition:opacity .8s ease;z-index:-4}
+  .noise{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity=".04"/></svg>');mix-blend-mode:overlay;opacity:.15;z-index:-2}
 
-  /* ===== LOADING (heart draws itself, then fills) ===== */
-  #loading{position:fixed;inset:0;display:grid;place-items:center;background:linear-gradient(135deg,#160c2e,#2a144f);z-index:9}
-  .loader-wrap{display:grid;place-items:center;gap:18px;text-align:center}
-  svg#heartBuild{width:min(58vmin,420px);filter:drop-shadow(0 18px 50px rgba(255,77,141,.6))}
-  #trace{fill:none;stroke:url(#grad);stroke-width:12;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.6s ease forwards}
-  #fill{opacity:0;animation:pop .9s ease forwards 2.7s}
-  @keyframes draw{to{stroke-dashoffset:0}}
-  @keyframes pop{from{transform:scale(.6);opacity:0} to{transform:scale(1);opacity:1}}
-  .loading-text{
-    font-weight:900;letter-spacing:.08em;
-    background:linear-gradient(90deg,#fff,#ffd1e8,#fff);-webkit-background-clip:text;background-clip:text;color:transparent;
-    animation:shimmer 2.2s linear infinite
-  }
-  @keyframes shimmer{0%{background-position:0%}100%{background-position:200%}}
+  /* ===== Loading: heart particles that assemble ===== */
+  #loading{position:fixed;inset:0;display:grid;place-items:center;background:linear-gradient(135deg,#120d29,#24124d);z-index:99}
+  .loadWrap{display:grid;place-items:center;gap:14px;text-align:center}
+  .pulse{font-weight:900;letter-spacing:.06em;background:linear-gradient(90deg,#fff,#ffd1e8,#fff);-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 2.2s linear infinite}
+  @keyframes shimmer{to{background-position:200%}}
+  canvas#heartbuild{width:min(72vmin,560px);height:min(72vmin,560px)}
 
-  /* ===== LAYOUT ===== */
-  .wrap{position:relative;display:grid;place-items:center;height:100%;padding:28px}
+  /* ===== Consent Gate ===== */
+  .gate{position:fixed;inset:0;display:grid;place-items:center;padding:24px;z-index:50}
   .card{
-    width:min(1000px,96vw);border-radius:28px;padding:24px 22px 18px;
-    background:linear-gradient( to bottom right, rgba(255,255,255,.18), rgba(255,255,255,.08));
-    border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(12px) saturate(140%);
-    box-shadow:var(--shadow)
+    width:min(960px,94vw);border-radius:28px;padding:22px;background:linear-gradient( to bottom right, var(--glass1), var(--glass2));
+    border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(14px) saturate(160%);box-shadow:var(--shadow)
   }
-  .head{display:grid;grid-template-columns:1fr auto;align-items:center;gap:14px;padding:6px 10px 16px}
-  .title{
-    font-size: clamp(28px,4.2vw,56px);font-weight:900;line-height:1.05;margin:0;
-    text-shadow:0 6px 22px rgba(255,77,141,.35)
-  }
-  .subtitle{margin:6px 0 0;opacity:.92;font-size:clamp(14px,2.2vw,18px)}
-  .avatar{
-    width:86px;height:86px;border-radius:50%;border:3px solid rgba(255,255,255,.8);
-    background:url('https://i.ibb.co/svhwTgM/saduni.jpg') center/cover no-repeat;box-shadow:0 10px 26px rgba(0,0,0,.4)
-  }
+  .head{display:grid;grid-template-columns:1fr auto;align-items:center;gap:14px;margin-bottom:10px}
+  .title{font-size:clamp(26px,4.2vw,46px);font-weight:900;line-height:1.05;margin:0;text-shadow:0 8px 24px rgba(255,94,168,.35)}
+  .avatar{width:86px;height:86px;border-radius:50%;border:3px solid rgba(255,255,255,.85);background:url('https://i.ibb.co/svhwTgM/saduni.jpg') center/cover no-repeat;filter:blur(2px) brightness(.8);opacity:.85}
+  .q{font-size:clamp(15px,2.4vw,18px);opacity:.96;margin:4px 0 14px}
+  .row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:640px){ .row{grid-template-columns:1fr} }
 
-  .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
-  @media (max-width: 880px){ .grid{grid-template-columns:1fr} }
-
-  .hero{
-    border-radius:20px;overflow:hidden;position:relative;min-height:320px;
-    background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-    border:1px solid rgba(255,255,255,.2)
-  }
-  .hero::before{
-    content:"";position:absolute;inset:0;background:url('https://i.ibb.co/svhwTgM/saduni.jpg') center/cover no-repeat;
-    filter:brightness(.9) saturate(1.1);opacity:.45;transform:scale(1.05)
-  }
-  .hero-inner{position:relative;z-index:1;padding:22px}
-  .glow{
-    font-size: clamp(26px,3.2vw,42px);font-weight:900;margin:0 0 10px;
-    text-shadow:0 0 12px var(--pink2), 0 0 28px var(--pink);
-  }
-  .tagline{margin:0;opacity:.96}
-
-  .panel{
-    border-radius:20px;padding:16px;background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
-    border:1px solid rgba(255,255,255,.22)
-  }
-
-  /* ===== BUTTONS (Fancy) ===== */
-  .toolbar{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-  @media (max-width: 500px){ .toolbar{grid-template-columns:1fr} }
   .btn{
     display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;padding:14px 16px;border-radius:16px;border:0;
-    font-weight:900;font-size:16px;letter-spacing:.02em;
-    background:#fff;color:#111;box-shadow:0 14px 26px rgba(0,0,0,.25);
+    font-weight:900;font-size:16px;letter-spacing:.02em;background:#fff;color:#111;box-shadow:0 14px 26px rgba(0,0,0,.25);
     transition:transform .08s ease, box-shadow .22s ease, background .2s
   }
   .btn:hover{ transform:translateY(-1px) }
   .btn:active{ transform:translateY(1px) scale(.98) }
-  .btn.heart{background:linear-gradient(135deg,#fff 0%,#ffe7f3 100%)}
-  .btn.teddy{background:linear-gradient(135deg,#fff 0%,#e9e6ff 100%)}
-  .btn.confetti{background:linear-gradient(135deg,#fff 0%,#e6fff4 100%)}
+  .btn.yes{background:linear-gradient(135deg,#fff 0%,#ffe7f3 100%)}
+  .btn.no{background:linear-gradient(135deg,#fff 0%,#e7e7ee 100%)}
 
-  /* ===== CANVAS FX LAYERS ===== */
-  canvas.fx{position:fixed;inset:0;pointer-events:none}
-  #layer-hearts{z-index:2}
-  #layer-sparkles{z-index:3}
-  #layer-confetti{z-index:4}
+  .note{opacity:.8;font-size:12px;margin-top:10px}
 
-  /* ===== SMALL FOOTER ===== */
-  .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px;opacity:.9;font-size:13px}
+  /* ===== Main App ===== */
+  .wrap{position:relative;display:none;height:100%;padding:24px;place-items:center}
+  .shell{width:min(1100px,96vw);display:grid;gap:16px}
+  .top{
+    display:grid;grid-template-columns:1.2fr .8fr;gap:16px
+  }
+  @media(max-width:920px){ .top{grid-template-columns:1fr} }
+
+  .hero{
+    position:relative;border-radius:24px;overflow:hidden;min-height:340px;
+    background:linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.04));
+    border:1px solid rgba(255,255,255,.22)
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;background:url('https://i.ibb.co/svhwTgM/saduni.jpg') center/cover no-repeat;
+    filter:brightness(.92) saturate(1.1);opacity:.0;transition:opacity .6s ease;transform:scale(1.04)
+  }
+  .heroBody{position:relative;z-index:1;padding:22px}
+  .glow{font-size:clamp(26px,3vw,40px);font-weight:900;margin:0 0 8px;text-shadow:0 0 14px #ffd1e8, 0 0 34px var(--primary)}
+  .tag{margin:0;opacity:.96}
+
+  .panel{
+    border-radius:24px;padding:16px;background:linear-gradient(180deg, var(--glass1), var(--glass2));
+    border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(12px) saturate(150%);
+  }
+  .toolbar{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  @media(max-width:560px){ .toolbar{grid-template-columns:1fr} }
+
+  .cta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+  @media(max-width:560px){ .cta{grid-template-columns:1fr} }
+
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:radial-gradient(circle at 30% 30%, #ffd1e8, #ff8abd 70%);color:#2a0b1e;font-weight:900;box-shadow:0 10px 24px rgba(255,94,168,.45)}
+
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:6px;opacity:.9;font-size:13px}
+  .hide{display:none !important}
 </style>
 </head>
 <body>
 
-<!-- ===== Loading ===== -->
-<div id="loading" aria-live="polite">
-  <div class="loader-wrap">
-    <svg id="heartBuild" viewBox="0 0 200 200">
-      <defs>
-        <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#ff9bd1"/>
-          <stop offset="100%" stop-color="#ff4d8d"/>
-        </linearGradient>
-      </defs>
-      <!-- trace path draws heart outline -->
-      <path id="trace" d="M100 172
-        C 60 140, 26 118, 26 82
-        C 26 56, 46 36, 72 36
-        C 87 36, 97 44, 100 52
-        C 103 44, 113 36, 128 36
-        C 154 36, 174 56, 174 82
-        C 174 118, 140 140, 100 172 Z"/>
-      <!-- fill pops in -->
-      <path id="fill" d="M100 172
-        C 60 140, 26 118, 26 82
-        C 26 56, 46 36, 72 36
-        C 87 36, 97 44, 100 52
-        C 103 44, 113 36, 128 36
-        C 154 36, 174 56, 174 82
-        C 174 118, 140 140, 100 172 Z"
-        fill="url(#grad)"/>
-    </svg>
-    <div class="loading-text">Loading love for Saduni…</div>
+<!-- Parallax base -->
+<div class="layer grad" id="grad"></div>
+<div class="layer photo" id="bgPhoto"></div>
+<div class="layer noise"></div>
+
+<!-- Loading -->
+<div id="loading">
+  <div class="loadWrap">
+    <canvas id="heartbuild"></canvas>
+    <div class="pulse">Spinning up love for Saduni…</div>
   </div>
 </div>
 
-<!-- ===== Background layers ===== -->
-<div class="stage">
-  <div class="bg-img"></div>
-  <div class="bg-grad"></div>
-  <div class="bg-noise"></div>
-</div>
-
-<!-- ===== FX Canvases ===== -->
-<canvas id="layer-hearts" class="fx"></canvas>
-<canvas id="layer-sparkles" class="fx"></canvas>
-<canvas id="layer-confetti" class="fx"></canvas>
-
-<!-- ===== UI ===== -->
-<div class="wrap">
+<!-- Consent Gate -->
+<section class="gate" id="gate">
   <div class="card">
     <div class="head">
       <div>
-        <h1 class="title">I ❤ You, <span style="color:#ffd1e8;text-shadow:0 0 18px #ff77b4">Saduni</span></h1>
-        <p class="subtitle">You are my favorite song, my softest place, and my forever.</p>
+        <h1 class="title">Hi Saduni ✨</h1>
+        <p class="q">Before we begin, are you happy for us to show your photo as the background here?</p>
       </div>
-      <div class="avatar" aria-hidden="true"></div>
+      <div class="avatar" aria-hidden="true" title="Preview (blurred)"></div>
     </div>
 
-    <div class="grid">
-      <section class="hero">
-        <div class="hero-inner">
-          <h2 class="glow">Every heartbeat spells your name</h2>
-          <p class="tagline">Click any button to fill the sky with love. Move your mouse / touch to paint sparkles ✨</p>
+    <div class="row">
+      <button class="btn yes" id="allowPhoto">✅ Yes, you can use my photo</button>
+      <button class="btn no" id="denyPhoto">🚫 No, keep it private</button>
+    </div>
+
+    <p class="q" style="margin-top:16px">And one more tiny thing… do you like me? 🤭</p>
+    <div class="row">
+      <button class="btn yes" id="likeALittle">A little</button>
+      <button class="btn yes" id="likeTooMuch">Too much 😉</button>
+    </div>
+
+    <div class="note">Your choices affect the animations only (for fun). Nothing is uploaded or stored anywhere.</div>
+  </div>
+</section>
+
+<!-- FX canvases -->
+<canvas id="layer-hearts" class="layer"></canvas>
+<canvas id="layer-sparkles" class="layer"></canvas>
+<canvas id="layer-confetti" class="layer"></canvas>
+
+<!-- App -->
+<main class="wrap" id="app">
+  <div class="shell">
+    <div class="top">
+      <section class="hero" id="hero">
+        <div class="heroBody">
+          <div class="pill">💘 For Saduni</div>
+          <h2 class="glow">I love you, always & forever</h2>
+          <p class="tag">Move your mouse to draw ✨ sparkles. Tap buttons to make the sky celebrate.</p>
         </div>
       </section>
 
       <aside class="panel">
-        <div style="display:grid;gap:12px">
-          <div class="toolbar">
-            <button id="btnHearts" class="btn heart">❤️ Heart Rain</button>
-            <button id="btnTeddy" class="btn teddy">🧸 Teddy Rain</button>
-            <button id="btnConfetti" class="btn confetti">🎆 Fireworks</button>
-          </div>
-          <div class="toolbar">
-            <button id="btnSparkles" class="btn">✨ Toggle Sparkles</button>
-            <button id="btnBurst" class="btn">💥 Heart Burst</button>
-            <button id="btnMessage" class="btn">💌 Love Note</button>
-          </div>
+        <div class="toolbar">
+          <button class="btn" id="btnHearts">❤️ Heart Rain</button>
+          <button class="btn" id="btnTeddy">🧸 Teddy Rain</button>
+          <button class="btn" id="btnFire">🎆 Fireworks</button>
+        </div>
+        <div class="cta">
+          <button class="btn" id="btnBurst">💥 Heart Burst</button>
+          <button class="btn" id="btnSparkles">✨ Toggle Sparkles</button>
+          <button class="btn" id="btnMessage">💌 Love Note</button>
         </div>
       </aside>
     </div>
 
     <div class="foot">
-      <div>Made with 💖 for Saduni</div>
+      <div>Made with 💖 for <b>Saduni</b></div>
       <div id="date"></div>
     </div>
   </div>
-</div>
+</main>
 
 <script>
-/* ========= UTIL ========= */
-const rand = (a,b)=>Math.random()*(b-a)+a;
-const TWO_PI = Math.PI*2;
+/* ----------------- Basics ----------------- */
+const IMG = 'https://i.ibb.co/svhwTgM/saduni.jpg';
+const bgPhoto = document.getElementById('bgPhoto');
+const hero = document.getElementById('hero');
+const app = document.getElementById('app');
+document.getElementById('date').textContent = new Date().toLocaleDateString();
+
+/* Parallax */
+const grad = document.getElementById('grad');
+addEventListener('mousemove', (e)=>{
+  const x = (e.clientX / innerWidth - .5) * 8;
+  const y = (e.clientY / innerHeight - .5) * 8;
+  grad.style.transform = `translate(${x}px, ${y}px)`;
+  if(bgPhoto.style.opacity>0) bgPhoto.style.transform = `translate(${-x/2}px, ${-y/2}px) scale(1.06)`;
+}, {passive:true});
+
+/* ----------------- Loading: particle heart morph ----------------- */
+(function buildHeart(){
+  const c = document.getElementById('heartbuild');
+  const ctx = c.getContext('2d');
+  function fit(){ const dpr=Math.max(1,Math.min(2,devicePixelRatio||1)); c.width=560*dpr; c.height=560*dpr; c.style.width='min(72vmin,560px)'; c.style.height='min(72vmin,560px)'; ctx.setTransform(dpr,0,0,dpr,0,0); }
+  fit(); addEventListener('resize',fit);
+  const cx = 280, cy = 260;
+  const dots = Array.from({length: 220}, ()=>({
+    x: Math.random()*560, y: Math.random()*560, vx:0, vy:0, s: Math.random()*2+1, hue: 330+Math.random()*40
+  }));
+  function heart(t){
+    // implicit heart curve mapping (nice shape)
+    const u = t*2*Math.PI;
+    const x = 16 * Math.pow(Math.sin(u),3);
+    const y = 13*Math.cos(u) - 5*Math.cos(2*u) - 2*Math.cos(3*u) - Math.cos(4*u);
+    return [x*8, -y*8];
+  }
+  let a=0, done=false;
+  (function loop(){
+    ctx.clearRect(0,0,560,560);
+    a += 0.02; if(a>1) { a=1; done=true; }
+    for(let i=0;i<dots.length;i++){
+      const t = (i/dots.length + a*0.5) % 1;
+      const [hx,hy] = heart(t);
+      const tx = cx + hx, ty = cy + hy;
+      const p = dots[i];
+      const ax = (tx - p.x)*0.04, ay = (ty - p.y)*0.04;
+      p.vx = (p.vx + ax)*0.92; p.vy = (p.vy + ay)*0.92;
+      p.x += p.vx; p.y += p.vy;
+      ctx.fillStyle = `hsl(${p.hue} 90% 60%)`;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.s,0,Math.PI*2); ctx.fill();
+    }
+    requestAnimationFrame(loop);
+  })();
+  // finish loading
+  setTimeout(()=>{ document.getElementById('loading').style.opacity='0'; setTimeout(()=>document.getElementById('loading').style.display='none',400); }, 2600);
+})();
+
+/* ----------------- Consent Gate ----------------- */
+let likeBoost = 1; // boosts effects if she clicks "Too much 😉"
+document.getElementById('allowPhoto').onclick = ()=>{
+  bgPhoto.style.backgroundImage = `url('${IMG}')`;
+  bgPhoto.style.opacity = '1';
+  hero.style.setProperty('--show','1');
+  hero.style.setProperty('opacity','.999');
+  hero.style.setProperty('--photo','1');
+  hero.style.setProperty('--blur','0');
+  hero.style.setProperty('--bright','1');
+  hero.style.setProperty('--sat','1.1');
+  hero.style.setProperty('--scale','1.04');
+  document.getElementById('gate').classList.add('hide');
+  app.style.display='grid';
+  // reveal hero inner photo overlay
+  hero.style.setProperty('--reveal','1');
+  hero.querySelector('.hero').style = '';
+  hero.classList.add('ready');
+  hero.querySelector(':scope').previousElementSibling;
+  hero.style.opacity='1';
+  hero.querySelector('.heroBody').parentElement.previousSibling;
+  hero.style.cssText += '';
+  hero.querySelector('.heroBody').parentElement.style = '';
+  hero.classList.remove('ghost');
+  hero.previousElementSibling;
+  hero.style;
+  hero.querySelector('.heroBody');
+  hero.parentElement.querySelector('.hero')?.style?.setProperty('--reveal','1');
+  // show hero bg image
+  document.querySelector('.hero::before');
+  hero.querySelector('.heroBody');
+  document.querySelectorAll('.hero')[0].style.setProperty('--reveal','1');
+  document.querySelectorAll('.hero')[0].style.setProperty('opacity','1');
+  document.querySelectorAll('.hero')[0].style.setProperty('transform','none');
+  document.querySelectorAll('.hero')[0].style.setProperty('filter','none');
+  document.querySelectorAll('.hero')[0].style.setProperty('backdrop-filter','');
+  // actually flip the ::before opacity:
+  document.styleSheets[0]; // force style recalc
+  requestAnimationFrame(()=> document.querySelector('.hero').style.setProperty('--x','1'));
+  document.querySelector('.hero').style.setProperty('--y','1');
+  document.querySelector('.hero').style.setProperty('--z','1');
+  // quick hack: add a class to reveal ::before via JS
+  document.querySelector('.hero').classList.add('revealPhoto');
+};
+document.getElementById('denyPhoto').onclick = ()=>{
+  bgPhoto.style.opacity='0';
+  document.getElementById('gate').classList.add('hide');
+  app.style.display='grid';
+};
+document.getElementById('likeALittle').onclick = ()=>{ likeBoost = 1.0; };
+document.getElementById('likeTooMuch').onclick = ()=>{ likeBoost = 1.6; };
+
+/* reveal hero background via CSS class */
+const css = document.createElement('style');
+css.textContent = `.hero.revealPhoto::before{opacity:.42}`;
+document.head.appendChild(css);
+
+/* ----------------- FX setup ----------------- */
 function fit(canvas){
   const dpr = Math.max(1, Math.min(2, window.devicePixelRatio||1));
   canvas.width = innerWidth*dpr; canvas.height = innerHeight*dpr;
@@ -214,185 +298,155 @@ function fit(canvas){
   const ctx = canvas.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0);
   return ctx;
 }
-const ctxHearts = fit(document.getElementById('layer-hearts'));
-const ctxSpark = fit(document.getElementById('layer-sparkles'));
-const ctxConf = fit(document.getElementById('layer-confetti'));
-addEventListener('resize', ()=>{ fit(document.getElementById('layer-hearts')); fit(document.getElementById('layer-sparkles')); fit(document.getElementById('layer-confetti')); });
+const cHearts = document.getElementById('layer-hearts');
+const cSpark = document.getElementById('layer-sparkles');
+const cConf = document.getElementById('layer-confetti');
+let ctxH = fit(cHearts), ctxS = fit(cSpark), ctxC = fit(cConf);
+addEventListener('resize', ()=>{ ctxH=fit(cHearts); ctxS=fit(cSpark); ctxC=fit(cConf); });
 
-/* ========= LOADING SEQUENCE ========= */
-setTimeout(()=>{ // after draw + pop
-  document.getElementById('loading').style.opacity = '0';
-  setTimeout(()=> document.getElementById('loading').style.display='none', 400);
-}, 3200);
-
-/* ========= HEART RAIN (Canvas Bezier hearts, glossy & rotating) ========= */
+/* ----------------- Advanced Heart Rain ----------------- */
 let heartDrops = [];
-function drawHeart(ctx, x,y, s, rot, color){
-  ctx.save(); ctx.translate(x,y); ctx.rotate(rot);
-  ctx.scale(s,s);
+function drawHeart(ctx, x,y, s, rot, hue){
+  ctx.save(); ctx.translate(x,y); ctx.rotate(rot); ctx.scale(s,s);
+  // glossy heart with highlight + shadow
+  const grad = ctx.createRadialGradient(-0.6,-0.6,0.1, 0,0,3);
+  grad.addColorStop(0,'rgba(255,255,255,.95)');
+  grad.addColorStop(.18, `hsl(${hue} 90% 65%)`);
+  grad.addColorStop(1, `hsl(${hue} 90% 55%)`);
+  ctx.fillStyle = grad;
   ctx.beginPath();
   ctx.moveTo(0,0);
-  ctx.bezierCurveTo(-1.5,-1.5, -3,0.5, 0,3);
-  ctx.bezierCurveTo(3,0.5, 1.5,-1.5, 0,0);
-  ctx.closePath();
-  const grd = ctx.createRadialGradient(-0.6,-0.6,0.1, 0,0,2.8);
-  grd.addColorStop(0, 'rgba(255,255,255,.95)');
-  grd.addColorStop(0.2, color);
-  grd.addColorStop(1, 'rgba(255,77,141,.85)');
-  ctx.fillStyle = grd; ctx.fill();
+  ctx.bezierCurveTo(-1.5,-1.5,-3,0.5,0,3);
+  ctx.bezierCurveTo(3,0.5,1.5,-1.5,0,0);
+  ctx.closePath(); ctx.fill();
+  // tiny glare
+  ctx.globalAlpha=.5; ctx.fillStyle='#fff'; ctx.beginPath(); ctx.ellipse(-0.7,-0.7,.25,.18,0,0,Math.PI*2); ctx.fill(); ctx.globalAlpha=1;
   ctx.restore();
 }
-function spawnHeartRain(amount=60){
-  for(let i=0;i<amount;i++){
+function spawnHeartRain(n=80){
+  const boost = likeBoost;
+  for(let i=0;i<n*boost;i++){
     heartDrops.push({
-      x: rand(-50, innerWidth+50),
-      y: rand(-innerHeight*0.2, -20),
-      vy: rand(1.2, 3.2),
-      vx: rand(-0.6, 0.6),
-      rot: rand(0,TWO_PI),
-      vr: rand(-0.03,0.03),
-      s: rand(10,28)/14,
-      color: `hsl(${rand(340, 360)},90%,60%)`,
-      life: rand(5,9)
+      x: Math.random()*innerWidth, y: -20-Math.random()*innerHeight*.2,
+      vx: (Math.random()-.5)*0.9, vy: Math.random()*2.6+1.2,
+      rot: Math.random()*Math.PI*2, vr: (Math.random()-.5)*0.04,
+      s: (Math.random()*20+14)/12, hue: 330+Math.random()*40, life: 1
     });
   }
 }
-(function heartLoop(t0=performance.now()){
-  ctxHearts.clearRect(0,0,innerWidth,innerHeight);
+(function heartLoop(){
+  // motion blur veil
+  ctxH.fillStyle = 'rgba(10,10,22,.16)';
+  ctxH.fillRect(0,0,innerWidth,innerHeight);
+
   heartDrops.forEach(h=>{
-    h.x+=h.vx; h.y+=h.vy; h.rot+=h.vr; h.life-=0.016;
-    drawHeart(ctxHearts, h.x,h.y,h.s,h.rot,h.color);
+    h.x+=h.vx; h.y+=h.vy; h.rot+=h.vr;
+    drawHeart(ctxH, h.x,h.y, h.s/16, h.rot, h.hue);
   });
-  heartDrops = heartDrops.filter(h=> h.y < innerHeight+40 && h.life>0);
+  heartDrops = heartDrops.filter(h=> h.y<innerHeight+60);
   requestAnimationFrame(heartLoop);
 })();
 
-/* ========= TEDDY RAIN (emoji drift + bounce at bottom) ========= */
+/* ----------------- Teddy Rain (emoji+soft bounce+shadow) ----------------- */
 let teddies = [];
-function spawnTeddyRain(amount=40){
-  for(let i=0;i<amount;i++){
+function spawnTeddy(n=60){
+  const boost = likeBoost;
+  for(let i=0;i<n*boost;i++){
     teddies.push({
-      x: rand(0,innerWidth), y: rand(-200,-40),
-      vy: rand(1.1,2.6), vx: rand(-0.4,0.4),
-      size: rand(26,44), rot: rand(-.3,.3), vr: rand(-.01,.01)
+      x: Math.random()*innerWidth, y: -60-Math.random()*200,
+      vx:(Math.random()-.5)*0.6, vy:Math.random()*2+1,
+      s: Math.random()*20+28, rot:(Math.random()-.5)*.5, vr:(Math.random()-.5)*.02
     });
   }
 }
 (function teddyLoop(){
-  const ctx = ctxHearts; // draw on same layer for depth
-  // draw existing hearts already done; overlay teddies as text
   teddies.forEach(t=>{
-    t.x+=t.vx; t.y+=t.vy; t.rot+=t.vr;
-    if(t.y>innerHeight-10){ t.vy*=-0.45; t.y=innerHeight-10; } // soft bounce
-    ctx.save(); ctx.translate(t.x,t.y); ctx.rotate(t.rot);
-    ctx.font = `${t.size}px system-ui, Apple Color Emoji, Segoe UI Emoji`;
-    ctx.fillText('🧸', 0, 0);
-    ctx.restore();
+    t.x+=t.vx; t.y+=t.vy; t.vy+=0.03; t.rot+=t.vr;
+    // Shadow
+    const sx = t.x, sy = Math.min(innerHeight-6, t.y+18);
+    ctxH.save(); ctxH.globalAlpha=.18; ctxH.fillStyle='#000'; ctxH.beginPath(); ctxH.ellipse(sx,sy, t.s*.5, t.s*.18,0,0,Math.PI*2); ctxH.fill(); ctxH.restore();
+    // Teddy
+    ctxH.save(); ctxH.translate(t.x,t.y); ctxH.rotate(t.rot);
+    ctxH.font = `${t.s}px system-ui, Apple Color Emoji, Segoe UI Emoji`; ctxH.fillText('🧸', 0, 0);
+    ctxH.restore();
+    // bounce
+    if(t.y>innerHeight-10){ t.y=innerHeight-10; t.vy*=-0.45; }
   });
-  teddies = teddies.filter(t=> Math.abs(t.vy)>0.08 || t.y<innerHeight-8);
+  teddies = teddies.filter(t=> Math.abs(t.vy)>0.05 || t.y<innerHeight-9);
   requestAnimationFrame(teddyLoop);
 })();
 
-/* ========= SPARKLES (mouse paint) ========= */
-let sparkOn = true;
-let sparkles = [];
-function spawnSpark(x,y){
+/* ----------------- Sparkles (mouse paint) ----------------- */
+let sparkOn = true, sparks = [];
+function addSpark(x,y){
   if(!sparkOn) return;
   for(let i=0;i<6;i++){
-    sparkles.push({
-      x, y, vx: rand(-1.2,1.2), vy: rand(-1.2,1.2),
-      life: 1, s: rand(1.5,2.8), hue: rand(300,360)
-    });
+    sparks.push({x,y, vx:(Math.random()-.5)*1.6, vy:(Math.random()-.5)*1.6, life:1, s:Math.random()*2.4+1.2, hue: 320+Math.random()*40});
   }
 }
 (function sparkLoop(){
-  ctxSpark.clearRect(0,0,innerWidth,innerHeight);
-  sparkles.forEach(p=>{
+  ctxS.clearRect(0,0,innerWidth,innerHeight);
+  sparks.forEach(p=>{
     p.x+=p.vx; p.y+=p.vy; p.life-=0.02;
-    ctxSpark.globalAlpha = Math.max(0,p.life);
-    ctxSpark.fillStyle = `hsl(${p.hue} 90% 70%)`;
-    ctxSpark.beginPath(); ctxSpark.arc(p.x,p.y,p.s,0,TWO_PI); ctxSpark.fill();
-    // little cross glint
-    ctxSpark.fillRect(p.x-0.5, p.y-3, 1, 6);
-    ctxSpark.fillRect(p.x-3, p.y-0.5, 6, 1);
+    ctxS.globalAlpha=Math.max(0,p.life);
+    ctxS.fillStyle = `hsl(${p.hue} 90% 70%)`;
+    ctxS.beginPath(); ctxS.arc(p.x,p.y,p.s,0,Math.PI*2); ctxS.fill();
+    // cross glint
+    ctxS.fillRect(p.x-0.5,p.y-3,1,6); ctxS.fillRect(p.x-3,p.y-0.5,6,1);
   });
-  ctxSpark.globalAlpha = 1;
-  sparkles = sparkles.filter(p=>p.life>0);
+  ctxS.globalAlpha=1; sparks=sparks.filter(p=>p.life>0);
   requestAnimationFrame(sparkLoop);
 })();
-addEventListener('mousemove', e=> spawnSpark(e.clientX, e.clientY), {passive:true});
-addEventListener('touchmove', e=> { const t=e.touches[0]; if(t) spawnSpark(t.clientX,t.clientY); }, {passive:true});
+addEventListener('mousemove', e=> addSpark(e.clientX,e.clientY), {passive:true});
+addEventListener('touchmove', e=>{const t=e.touches[0]; if(t) addSpark(t.clientX,t.clientY);}, {passive:true});
 
-/* ========= CONFETTI FIREWORKS ========= */
+/* ----------------- Fireworks ----------------- */
 function fireworks(x,y){
-  const parts = Array.from({length: 140}, ()=>({
-    x, y,
-    vx: Math.cos(rand(0,TWO_PI))*rand(1.5,6),
-    vy: Math.sin(rand(0,TWO_PI))*rand(1.5,6),
-    g: 0.06 + Math.random()*0.05,
-    s: rand(1.6,3.4),
-    life: rand(40,70),
-    hue: rand(0,360),
-    rot: rand(0,TWO_PI), vr: rand(-0.2,0.2)
+  const parts = Array.from({length: Math.floor(140*likeBoost)}, ()=>({
+    x,y, vx:Math.cos(Math.random()*Math.PI*2)* (Math.random()*5+1.5),
+    vy:Math.sin(Math.random()*Math.PI*2)* (Math.random()*5+1.5),
+    g:.06+Math.random()*.05, s:Math.random()*2.4+1.2, life:60+Math.random()*30, hue:Math.random()*360, rot:Math.random()*Math.PI*2, vr:(Math.random()-.5)*.25
   }));
-  let anim;
   (function loop(){
-    ctxConf.clearRect(0,0,innerWidth,innerHeight);
+    ctxC.clearRect(0,0,innerWidth,innerHeight);
     parts.forEach(p=>{
-      p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life--;
-      ctxConf.save(); ctxConf.translate(p.x,p.y); ctxConf.rotate(p.rot);
-      ctxConf.fillStyle = `hsl(${p.hue} 90% 60%)`;
-      ctxConf.fillRect(-p.s/2, -p.s/2, p.s, p.s);
-      ctxConf.restore();
+      p.vy+=p.g; p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr; p.life--;
+      ctxC.save(); ctxC.translate(p.x,p.y); ctxC.rotate(p.rot);
+      ctxC.fillStyle = `hsl(${p.hue} 90% 60%)`; ctxC.fillRect(-p.s/2,-p.s/2,p.s,p.s); ctxC.restore();
     });
-    if(parts.some(p=>p.life>0)) anim=requestAnimationFrame(loop); else ctxConf.clearRect(0,0,innerWidth,innerHeight);
+    if(parts.some(p=>p.life>0)) requestAnimationFrame(loop); else ctxC.clearRect(0,0,innerWidth,innerHeight);
   })();
 }
 
-/* ========= HEART BURST (clicky) ========= */
-function heartBurst(x,y, count=90){
-  for(let i=0;i<count;i++){
+/* ----------------- Heart Burst ----------------- */
+function heartBurst(x,y,n=90){
+  for(let i=0;i<n*likeBoost;i++){
     heartDrops.push({
-      x, y,
-      vy: Math.sin(i/count*TWO_PI)*rand(1,4),
-      vx: Math.cos(i/count*TWO_PI)*rand(1,4),
-      rot: rand(0,TWO_PI), vr: rand(-.05,.05),
-      s: rand(8,18)/14, color:`hsl(${rand(340,360)} 90% 60%)`, life: rand(3,6)
+      x, y, vx:Math.cos(i/n*2*Math.PI)*(Math.random()*3+1.2), vy:Math.sin(i/n*2*Math.PI)*(Math.random()*3+1.2),
+      rot:Math.random()*Math.PI*2, vr:(Math.random()-.5)*.08, s:(Math.random()*12+10)/12, hue: 330+Math.random()*40
     });
   }
 }
 
-/* ========= BUTTON WIRING ========= */
-document.getElementById('btnHearts').addEventListener('click', ()=> spawnHeartRain(120));
-document.getElementById('btnTeddy').addEventListener('click', ()=> spawnTeddyRain(80));
-document.getElementById('btnConfetti').addEventListener('click', e=>{
-  const rect = e.target.getBoundingClientRect();
-  fireworks(rect.left + rect.width/2, rect.top + rect.height/2);
-});
-document.getElementById('btnSparkles').addEventListener('click', ()=>{
-  sparkOn = !sparkOn;
-  document.getElementById('btnSparkles').textContent = sparkOn ? '✨ Toggle Sparkles' : '✨ Sparkles Off';
-});
-document.getElementById('btnBurst').addEventListener('click', e=>{
-  const rect = e.target.getBoundingClientRect();
-  heartBurst(rect.left + rect.width/2, rect.top + rect.height/2);
-});
-document.getElementById('btnMessage').addEventListener('click', ()=>{
+/* ----------------- Buttons ----------------- */
+document.getElementById('btnHearts').onclick = ()=> spawnHeartRain(120);
+document.getElementById('btnTeddy').onclick  = ()=> spawnTeddy(90);
+document.getElementById('btnFire').onclick   = (e)=>{ const r=e.target.getBoundingClientRect(); fireworks(r.left+r.width/2, r.top+r.height/2); };
+document.getElementById('btnBurst').onclick  = (e)=>{ const r=e.target.getBoundingClientRect(); heartBurst(r.left+r.width/2, r.top+r.height/2); };
+document.getElementById('btnSparkles').onclick = (e)=>{ sparkOn=!sparkOn; e.target.textContent = sparkOn? '✨ Toggle Sparkles' : '✨ Sparkles Off'; };
+document.getElementById('btnMessage').onclick = ()=>{
   const msgs = [
-    "Saduni, you are my once-in-a-lifetime ❤️",
-    "With you, every day is magic ✨",
-    "You’re my favorite person. Always. 💞",
-    "Holding your smile in my heart, forever 💗"
+    "Saduni, you’re my favorite place to be. 💖",
+    "Every minute with you is my lucky minute. ✨",
+    "You + Me = Always. 💞",
+    "Your smile? My sunshine. ☀️"
   ];
   alert(msgs[Math.floor(Math.random()*msgs.length)]);
-});
-document.getElementById('date').textContent = new Date().toLocaleDateString();
+};
 
-/* ========= EXTRA: click anywhere = burst ========= */
-addEventListener('click', (e)=>{
-  if(e.target.closest('.btn')) return;
-  heartBurst(e.clientX, e.clientY, 60);
-});
+/* Click anywhere for a burst */
+addEventListener('click', (e)=>{ if(!e.target.classList.contains('btn')) heartBurst(e.clientX,e.clientY,60); });
+
 </script>
 </body>
 </html>
