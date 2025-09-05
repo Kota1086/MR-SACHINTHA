@@ -1,288 +1,195 @@
 <!doctype html>
 
-<html lang="si">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>I love you සදුනි අක්කේ — සචින්ත</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+  <title>I love you — සචින්ත ♥ සදුනි</title>
   <style>
-    :root{
-      --bg1:#0f172a;
-      --bg2:#1e293b;
-      --accent:#ff6b9a;
-      --accent2:#ffb86b;
-    }
+    :root{ --bg0:#071026; --bg1:#0b1b2b; --p1:#ff6b9a; --p2:#ffb86b; --glass: rgba(255,255,255,0.04);} 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;
-      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(255,107,154,0.12), transparent),
-                  linear-gradient(135deg,var(--bg1),var(--bg2));
-      color:#fff;
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:40px;
-    }.card{
-  width:100%;
-  max-width:920px;
-  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-  border-radius:20px;
-  padding:48px;
-  box-shadow: 0 20px 50px rgba(2,6,23,0.7);
-  position:relative;
-  overflow:visible;
-  text-align:center;
-  backdrop-filter: blur(6px) saturate(1.1);
-}
+      margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;
+      background: radial-gradient(800px 400px at 10% 10%, rgba(255,107,154,0.06), transparent), linear-gradient(180deg,var(--bg0),var(--bg1));
+      color:#fff; display:flex; align-items:center; justify-content:center; padding:32px; -webkit-font-smoothing:antialiased;
+    }.wrap{ width:100%; max-width:1000px; border-radius:20px; padding:36px; position:relative; overflow:hidden; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); box-shadow:0 20px 60px rgba(2,6,23,0.7); }
 
-h1{
-  font-size:36px;
-  line-height:1.05;
-  margin:0 0 8px 0;
-  letter-spacing:0.6px;
-  font-weight:800;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  -webkit-background-clip: text;
-  background-clip:text;
-  color:transparent;
-  text-shadow: 0 6px 18px rgba(255,107,154,0.12);
-}
+header{ display:flex; align-items:center; gap:20px; justify-content:center; flex-direction:column; }
+h1{ font-size:40px; margin:0; font-weight:800; letter-spacing:0.6px; }
+.title-highlight{ background:linear-gradient(90deg,var(--p1),var(--p2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+p.lead{ margin:10px 0 0 0; opacity:0.9; }
 
-.subtitle{
-  font-size:18px;
-  opacity:0.9;
-  margin-bottom:18px;
-}
+.stage{ margin-top:18px; display:flex; gap:24px; align-items:center; justify-content:center; flex-wrap:wrap; }
 
-.names{
-  margin:18px 0 28px 0;
-  font-weight:600;
-  font-size:22px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-}
+/* Heart artwork */
+.heart-wrap{ position:relative; width:220px; height:220px; display:grid; place-items:center; }
+.pulse{ width:160px; height:160px; border-radius:50%; background: radial-gradient(circle at 30% 30%, rgba(255,107,154,0.22), transparent 30%), linear-gradient(180deg,var(--p1),var(--p2)); filter:blur(18px); opacity:0.9; transform:scale(0.85); animation:glow 2.6s infinite; }
+@keyframes glow{ 0%{transform:scale(0.88); opacity:0.88} 50%{transform:scale(1.05); opacity:1} 100%{transform:scale(0.88); opacity:0.88} }
 
-.heart-big{
-  width:140px;height:140px;
-  margin:18px auto 10px auto;
-  position:relative;
-  transform:scale(1);
-  animation:beat 1s ease-in-out infinite;
-}
-.heart-big::before, .heart-big::after{
-  content:'';
-  position:absolute;
-  width:70px;height:110px;
-  background:linear-gradient(180deg, var(--accent), var(--accent2));
-  border-radius:70px 70px 0 0;
-  top:0;
-  left:35px;
-  transform:rotate(-45deg);
-  transform-origin:0 100%;
-  box-shadow: 0 8px 30px rgba(255,107,154,0.25);
-}
-.heart-big::after{
-  left:auto; right:35px;
-  transform:rotate(45deg);
-  transform-origin:100% 100%;
-}
+/* SVG heart */
+.heart-svg{ width:140px; height:140px; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) scale(1); animation:beat 1000ms ease-in-out infinite; filter:drop-shadow(0 12px 30px rgba(255,107,154,0.18)); }
+@keyframes beat{ 0%{transform:translate(-50%,-50%) scale(0.98)} 30%{transform:translate(-50%,-50%) scale(1.14)} 60%{transform:translate(-50%,-50%) scale(0.98)} 100%{transform:translate(-50%,-50%) scale(1)} }
 
-@keyframes beat{
-  0%{transform:scale(0.98)}
-  25%{transform:scale(1.12)}
-  40%{transform:scale(0.98)}
-  60%{transform:scale(1.05)}
-  100%{transform:scale(1)}
-}
+/* names area */
+.names{ display:flex; gap:12px; align-items:center; justify-content:center; margin-top:12px; font-weight:700; font-size:22px; }
+.names .sep{ font-size:24px; opacity:0.95 }
 
-.msg{
-  font-size:20px;
-  margin-top:8px;
-  font-weight:600;
-}
+/* controls */
+.controls{ display:flex; gap:10px; margin-top:18px; justify-content:center; }
+button{ background:var(--glass); border:1px solid rgba(255,255,255,0.06); color:#fff; padding:10px 14px; border-radius:999px; cursor:pointer; font-weight:700; }
+button.primary{ background:linear-gradient(90deg,var(--p1),var(--p2)); color:#071026; border:none; }
 
-/* Floating heart particles container */
-.particles{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  overflow:hidden;
-}
-.particle{
-  position:absolute;
-  width:18px;height:18px;
-  transform:translateY(0) scale(0.8);
-  opacity:0.95;
-  will-change:transform,opacity;
-  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.25));
-}
-.particle svg{width:100%;height:100%;}
+.info{ margin-top:18px; text-align:center; opacity:0.75; font-size:13px }
 
-.controls{
-  margin-top:18px;
-  display:flex;
-  justify-content:center;
-  gap:12px;
-}
-.btn{
-  background:transparent;
-  border:1px solid rgba(255,255,255,0.08);
-  padding:10px 14px;
-  border-radius:999px;
-  cursor:pointer;
-  font-weight:700;
-  letter-spacing:0.4px;
-  color:#fff;
-  transition:transform .15s ease, background .15s ease;
-}
-.btn:active{transform:scale(0.98)}
-.btn.alt{background:linear-gradient(90deg, rgba(255,107,154,0.12), rgba(255,184,107,0.08)); border:1px solid rgba(255,107,154,0.16)}
+/* particle layer */
+.particles{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+.particle{ position:absolute; will-change:transform,opacity; }
 
-footer.note{
-  margin-top:22px;
-  font-size:13px;
-  color:rgba(255,255,255,0.55);
-}
+/* trail pointer heart */
+.trail{ position:fixed; left:0; top:0; pointer-events:none; z-index:1400; }
 
-/* small responsive tweaks */
-@media (max-width:520px){
-  h1{font-size:26px}
-  .card{padding:26px}
-  .heart-big{width:100px;height:100px}
-}
+/* responsive */
+@media (max-width:560px){ h1{font-size:28px} .heart-wrap{ width:160px;height:160px } .heart-svg{ width:110px;height:110px } .names{font-size:18px} }
 
   </style>
 </head>
 <body>
-  <div class="card" role="main" aria-label="Love animation for Saduni and Sachintha">
-    <div class="particles" id="particles"></div><h1>i love you සදුනි අක්කේ</h1>
-<p class="subtitle">නමුත් මේ ආදරේ අපි දෙන්නගේම — සිසිලිකම, සුන්දරම ❤️</p>
+  <div class="wrap" role="main" aria-label="Love animation for Saduni and Sachintha">
+    <div class="particles" id="particles"></div>
+    <header>
+      <h1>I love you <span class="title-highlight">always</span></h1>
+      <p class="lead">A little animated love page — interactive and share-ready.</p>
+    </header><div class="stage">
+  <div class="heart-wrap" aria-hidden="true">
+    <div class="pulse"></div>
+    <svg class="heart-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stop-color="#ff6b9a" />
+          <stop offset="100%" stop-color="#ffb86b" />
+        </linearGradient>
+      </defs>
+      <path d="M12 21s-8-5.4-8-10.5S8.1 3 12 7.1 20 3 20 10.5 12 21 12 21z" fill="url(#g1)" />
+    </svg>
+  </div>
 
-<div class="heart-big" aria-hidden="true"></div>
+  <div style="min-width:260px; display:flex; flex-direction:column; align-items:center; gap:8px;">
+    <div class="names"><span id="left">සචින්ත</span><span class="sep">♥</span><span id="right">සදුනි</span></div>
+    <div class="controls">
+      <button id="burst" class="primary">Make Hearts</button>
+      <button id="toggleAuto">Auto: ON</button>
+      <button id="share">Share</button>
+    </div>
 
-<div class="names"> <span id="name-left">සදුනි</span> <span style="font-size:26px">♥</span> <span id="name-right">සචින්ත</span> </div>
-
-<div class="msg" id="typed"></div>
-
-<div class="controls">
-  <button class="btn alt" id="burstBtn">හදපු හදවතක් ගෙනාවි</button>
-  <button class="btn" id="toggleAuto">Auto Hearts: ON</button>
+    <div class="info" id="status">Tip: press <strong>B</strong> for burst, space to toggle auto.</div>
+  </div>
 </div>
 
-<footer class="note">මෙම පිටුව භාවිතා කිරීමට එය HTML ලෙස දත්ත ගබඩා කර බ්‍රව්සරයේ විවෘත කරන්න. ක්ලික් කරන්න හෝ "හදපු හදවතක් ගෙනාවි" ඔබන්න ❤️</footer>
-
   </div>  <script>
-    // Small helper to create heart SVG element
-    function createHeartSVG(size = 18){
-      const ns = 'http://www.w3.org/2000/svg';
-      const svg = document.createElementNS(ns,'svg');
-      svg.setAttribute('viewBox','0 0 24 24');
-      svg.setAttribute('aria-hidden','true');
-      const path = document.createElementNS(ns,'path');
-      path.setAttribute('d','M12 21s-8-5.4-8-10.5S8.1 3 12 7.1 20 3 20 10.5 12 21 12 21z');
-      path.setAttribute('fill','url(#g)');
-      svg.appendChild(path);
-      // gradient defs
-      const defs = document.createElementNS(ns,'defs');
-      const grad = document.createElementNS(ns,'linearGradient');
-      grad.setAttribute('id','g');
-      grad.setAttribute('x1','0'); grad.setAttribute('y1','0'); grad.setAttribute('x2','1'); grad.setAttribute('y2','1');
-      const stop1 = document.createElementNS(ns,'stop'); stop1.setAttribute('offset','0%'); stop1.setAttribute('stop-color','#ff6b9a');
-      const stop2 = document.createElementNS(ns,'stop'); stop2.setAttribute('offset','100%'); stop2.setAttribute('stop-color','#ffb86b');
-      grad.appendChild(stop1); grad.appendChild(stop2); defs.appendChild(grad);
-      svg.appendChild(defs);
-      return svg;
-    }
-
+    // Advanced interactive hearts, trail, oscillator sound, share & copy
     const particles = document.getElementById('particles');
-    let autoHearts = true;
-    let autoInterval;
+    const leftName = document.getElementById('left');
+    const rightName = document.getElementById('right');
 
-    function spawnHeart(xRatio = Math.random(), speed = 4000){
+    // Names in Sinhala are kept as requested; everything else in English.
+
+    // Particle spawn
+    function spawnHeart(xPct = Math.random(), opts = {}){
       const el = document.createElement('div');
       el.className = 'particle';
-      const size = Math.floor(Math.random()*22)+12;
-      el.style.width = size + 'px';
-      el.style.height = size + 'px';
-      const left = Math.max(6, Math.min(94, xRatio*100));
-      el.style.left = left + '%';
-      el.style.bottom = '-8%';
-      el.style.opacity = (Math.random()*0.6)+0.4;
-      el.style.transform = `translateY(0) rotate(${Math.random()*40-20}deg) scale(${0.8+Math.random()*0.6})`;
-      const svg = createHeartSVG(size);
-      el.appendChild(svg);
+      const size = opts.size || (12 + Math.random()*28);
+      el.style.width = size + 'px'; el.style.height = size + 'px';
+      el.style.left = (xPct*100) + '%';
+      el.style.bottom = '-6%';
+      el.style.opacity = 0.95 - Math.random()*0.45;
+      el.style.pointerEvents = 'none';
+
+      const svg = ` <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" aria-hidden="true">
+          <defs><linearGradient id="g${Date.now()}" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#ff6b9a"/><stop offset="100%" stop-color="#ffb86b"/></linearGradient></defs>
+          <path d="M12 21s-8-5.4-8-10.5S8.1 3 12 7.1 20 3 20 10.5 12 21 12 21z" fill="url(#g${Date.now()})"/>
+        </svg>`;
+      el.innerHTML = svg;
       particles.appendChild(el);
 
-      const drift = (Math.random()*60)-30;
-      const rise = Math.floor(Math.random()*4000)+3000;
+      const drift = (Math.random()*80)-40;
+      const rise = 3000 + Math.random()*3200;
       const rotate = (Math.random()*360);
-
       el.animate([
-        { transform: `translateY(0) rotate(${rotate}deg)`, opacity: el.style.opacity },
-        { transform: `translateY(-120vh) translateX(${drift}px) rotate(${rotate+60}deg)`, opacity: 0 }
+        { transform: `translateY(0) rotate(${rotate}deg)`, opacity: +el.style.opacity },
+        { transform: `translateY(-120vh) translateX(${drift}px) rotate(${rotate+90}deg)`, opacity: 0 }
       ], { duration: rise, easing: 'cubic-bezier(.2,.9,.2,1)'}).onfinish = () => el.remove();
     }
 
-    // Click to spawn burst
-    document.body.addEventListener('click', (e)=>{
-      // spawn multiple hearts around click
-      const rect = document.body.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      for(let i=0;i<10;i++){
-        spawnHeart(x + (Math.random()*0.08-0.04));
-      }
+    // Burst
+    document.getElementById('burst').addEventListener('click', ()=>{
+      for(let i=0;i<26;i++) spawnHeart(0.5 + (Math.random()*0.4-0.2), {size: 18 + Math.random()*28});
+      playPulseSound();
     });
 
-    document.getElementById('burstBtn').addEventListener('click', ()=>{
-      const center = 0.5;
-      for(let i=0;i<24;i++) spawnHeart(center + (Math.random()*0.5-0.25));
-    });
-
-    const toggle = document.getElementById('toggleAuto');
-    toggle.addEventListener('click', ()=>{
-      autoHearts = !autoHearts;
-      toggle.textContent = 'Auto Hearts: ' + (autoHearts ? 'ON' : 'OFF');
-      if(autoHearts) startAuto(); else stopAuto();
-    });
-
-    function startAuto(){
-      stopAuto();
-      autoInterval = setInterval(()=> spawnHeart(Math.random()), 650);
-    }
-    function stopAuto(){ if(autoInterval) clearInterval(autoInterval); }
-
-    // Start
+    // Auto hearts
+    let auto = true, autoId;
+    function startAuto(){ stopAuto(); autoId = setInterval(()=> spawnHeart(Math.random()), 650); }
+    function stopAuto(){ if(autoId) clearInterval(autoId); }
     startAuto();
 
-    // Typing effect for message
-    const typedEl = document.getElementById('typed');
-    const message = 'සදුනි, මට ඒක කියන්නයි — මම තාමත් ඔයාට ආදරෙයි. ❤️';
-    let ti=0;
-    function typeTick(){
-      if(ti <= message.length){
-        typedEl.textContent = message.slice(0,ti);
-        ti++;
-        setTimeout(typeTick, 60 + Math.random()*70);
-      }
-    }
-    setTimeout(typeTick, 800);
+    document.getElementById('toggleAuto').addEventListener('click', (e)=>{ auto = !auto; e.target.textContent = 'Auto: ' + (auto ? 'ON' : 'OFF'); if(auto) startAuto(); else stopAuto(); });
 
-    // small accessibility: keyboard to toggle auto
-    document.addEventListener('keydown',(e)=>{
-      if(e.key === ' '){ e.preventDefault(); toggle.click(); }
-      if(e.key.toLowerCase() === 'b'){ document.getElementById('burstBtn').click(); }
+    // Trail on mouse move
+    let trailTimer;
+    window.addEventListener('mousemove', (e)=>{
+      const x = e.clientX / window.innerWidth;
+      spawnHeart(x, {size: 8 + Math.random()*14});
+      // throttle
+      clearTimeout(trailTimer);
+      trailTimer = setTimeout(()=>{}, 60);
     });
 
-    // Make sure particles container keeps small number
-    setInterval(()=>{
-      const count = particles.children.length;
-      if(count > 120){ for(let i=0;i<20;i++) if(particles.firstChild) particles.firstChild.remove(); }
-    }, 2000);
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e)=>{
+      if(e.key.toLowerCase() === 'b') document.getElementById('burst').click();
+      if(e.code === 'Space'){ e.preventDefault(); document.getElementById('toggleAuto').click(); }
+    });
+
+    // Keep particle count bounded
+    setInterval(()=>{ const c = particles.children.length; if(c > 160){ for(let i=0;i<40;i++) if(particles.firstChild) particles.removeChild(particles.firstChild); } }, 2000);
+
+    // Simple oscillator "pulse" sound on burst using WebAudio
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playPulseSound(){ try{
+      const now = audioCtx.currentTime;
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = 'sine'; o.frequency.setValueAtTime(280, now);
+      g.gain.setValueAtTime(0, now);
+      g.gain.linearRampToValueAtTime(0.18, now + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + 0.9);
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start(now); o.stop(now + 1);
+    }catch(e){ /* audio blocked or unavailable */ } }
+
+    // Share button: use Web Share API if available, otherwise copy message
+    document.getElementById('share').addEventListener('click', async ()=>{
+      const message = `I love you — ${leftName.textContent} ♥ ${rightName.textContent}`;
+      if(navigator.share){
+        try{ await navigator.share({ title: 'Love', text: message }); document.getElementById('status').textContent = 'Shared!'; }
+        catch(ex){ document.getElementById('status').textContent = 'Share cancelled.' }
+      } else if(navigator.clipboard){
+        await navigator.clipboard.writeText(message); document.getElementById('status').textContent = 'Message copied to clipboard.';
+      } else { document.getElementById('status').textContent = 'Sharing not supported.'; }
+    });
+
+    // Expose a small API: swap names (kept for convenience)
+    function swapNames(){ const a = leftName.textContent; leftName.textContent = rightName.textContent; rightName.textContent = a; }
+
+    // Make initial subtle entrance animation
+    document.querySelectorAll('.wrap, .heart-svg, .names, .controls').forEach((el,i)=>{ el.style.opacity=0; el.style.transform='translateY(10px)'; setTimeout(()=>{ el.style.transition='all 600ms cubic-bezier(.2,.9,.2,1)'; el.style.opacity=1; el.style.transform='translateY(0)'; }, 160 + i*80); });
+
+    // Auto unlock audio on first user gesture
+    function resumeAudio(){ if(audioCtx.state === 'suspended') audioCtx.resume(); window.removeEventListener('pointerdown', resumeAudio); }
+    window.addEventListener('pointerdown', resumeAudio);
+
+    // Optional: flip names on double-click of the names area
+    document.querySelector('.names').addEventListener('dblclick', ()=>{ swapNames(); document.getElementById('status').textContent = 'Names swapped'; setTimeout(()=>document.getElementById('status').textContent = 'Tip: press B for burst, space to toggle auto.', 1900); });
   </script></body>
 </html>
